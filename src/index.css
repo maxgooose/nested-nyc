@@ -1,0 +1,228 @@
+/* Import similar font to SK-Modernist - must be first */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+ * NESTED App - Global Styles
+ * Font: DM Sans (similar to SK-Modernist)
+ */
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #1a1a2e;
+}
+
+/* Desktop preview container - centers the mobile frame */
+.desktop-preview {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+/* Mobile frame wrapper - matches Figma exactly */
+.mobile-frame {
+  width: 375px;
+  height: 812px;
+  background-color: #ffffff;
+  border-radius: 44px;
+  overflow: hidden;
+  box-shadow: 
+    0 50px 100px -20px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+/* Phone frame bezel effect */
+.mobile-frame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 44px;
+  border: 8px solid #e8e8e8;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Inner content area */
+.mobile-content {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  background-color: #ffffff;
+}
+
+/* Hide scrollbar but keep functionality */
+.mobile-content::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-content {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* =========================
+   DESIGN SYSTEM UTILITIES
+   ========================= */
+
+/* Colors */
+.text-primary { color: #E5385A; }
+.bg-primary { background-color: #E5385A; }
+.border-primary { border-color: #E5385A; }
+
+.text-dark { color: #231429; }
+.bg-dark { background-color: #231429; }
+
+.text-gray-description { color: #ADAFBB; }
+.text-gray-secondary { color: #323755; }
+
+.bg-gray-light { background-color: #F3F3F3; }
+.border-gray { border-color: #E8E6EA; }
+
+/* Typography */
+.font-bold-title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+/* Button Styles */
+.btn-primary {
+  background-color: #E5385A;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  height: 56px;
+  border-radius: 15px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #D42E4F;
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #E5385A;
+  font-weight: 600;
+  font-size: 16px;
+  height: 56px;
+  border-radius: 15px;
+  width: 100%;
+  border: 1px solid #E8E6EA;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  border-color: #E5385A;
+  background-color: rgba(229, 56, 90, 0.05);
+}
+
+/* Social Button */
+.btn-social {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  border: 1px solid #E8E6EA;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-social:hover {
+  border-color: #E5385A;
+  transform: translateY(-2px);
+}
+
+/* Home Indicator */
+.home-indicator {
+  width: 134px;
+  height: 5px;
+  background-color: #231429;
+  border-radius: 100px;
+  margin: 0 auto;
+}
+
+/* Pagination Dots */
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #E8E6EA;
+  transition: background-color 0.3s ease;
+}
+
+.dot.active {
+  background-color: #E5385A;
+}
+
+/* Card Stack Animation */
+.card-stack {
+  position: relative;
+  width: 240px;
+  height: 340px;
+}
+
+.card-stack .card {
+  position: absolute;
+  width: 240px;
+  height: 340px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  background-size: cover;
+  background-position: center;
+}
+
+/* Utility classes */
+@layer utilities {
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top, 47px);
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 34px);
+  }
+}
+
