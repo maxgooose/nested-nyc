@@ -14,6 +14,10 @@ import { useNavigate } from 'react-router-dom'
 function SignUpScreen() {
   const navigate = useNavigate()
 
+  const handleContinueWithEmail = () => {
+    navigate('/uni-email')
+  }
+
   return (
     <div 
       className="flex flex-col h-full bg-white relative"
@@ -42,6 +46,7 @@ function SignUpScreen() {
       
       {/* Continue with email button */}
       <button 
+        onClick={handleContinueWithEmail}
         style={{
           marginTop: '100px',
           width: '100%',

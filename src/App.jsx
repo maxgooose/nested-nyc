@@ -8,6 +8,7 @@ import Onboarding2 from './pages/Onboarding2'
 import Onboarding3 from './pages/Onboarding3'
 import SignUpScreen from './pages/SignUpScreen'
 import PhoneScreen from './pages/PhoneScreen'
+import UniEmailScreen from './pages/UniEmailScreen'
 import VerifyScreen from './pages/VerifyScreen'
 import ProfileScreen from './pages/ProfileScreen'
 import GenderScreen from './pages/GenderScreen'
@@ -39,6 +40,7 @@ function App() {
           
           {/* Auth Flow */}
           <Route path="/signup" element={<SignUpScreen />} />
+          <Route path="/uni-email" element={<UniEmailScreen />} />
           <Route path="/phone" element={<PhoneScreen />} />
           <Route path="/verify" element={<VerifyScreen />} />
           
