@@ -8,10 +8,10 @@ import { useNavigate } from 'react-router-dom'
  * - Card stack in upper portion (project/team photos)
  * - Card size: ~260x360, border-radius 15px
  * - Card rotations: back ~10°, middle ~5°, front 0°
- * - Title: "Verified Students", #E5385A, bold, ~28px
+ * - Title: "Verified Students", #5B4AE6, bold, ~28px
  * - Description: gray #ADAFBB, 14px, centered
- * - Dots: 8px, gap 8px, active is #E5385A
- * - Button: full width, 56px height, 15px radius, #E5385A
+ * - Dots: 8px, gap 8px, active is #5B4AE6
+ * - Button: full width, 56px height, 15px radius, #5B4AE6
  * - Home indicator at bottom
  */
 
@@ -33,7 +33,7 @@ function Onboarding1() {
         {/* Title */}
         <h1 
           className="text-[28px] font-bold text-center"
-          style={{ color: '#E5385A' }}
+          style={{ color: '#5B4AE6' }}
         >
           Verified Students
         </h1>
@@ -55,7 +55,7 @@ function Onboarding1() {
               width: '8px', 
               height: '8px', 
               borderRadius: '50%', 
-              backgroundColor: '#E5385A' 
+              backgroundColor: '#5B4AE6' 
             }} 
           />
           <div 
@@ -63,7 +63,7 @@ function Onboarding1() {
               width: '8px', 
               height: '8px', 
               borderRadius: '50%', 
-              backgroundColor: '#E8E6EA' 
+              backgroundColor: '#E5E7EB' 
             }} 
           />
           <div 
@@ -71,7 +71,7 @@ function Onboarding1() {
               width: '8px', 
               height: '8px', 
               borderRadius: '50%', 
-              backgroundColor: '#E8E6EA' 
+              backgroundColor: '#E5E7EB' 
             }} 
           />
         </div>
@@ -85,7 +85,7 @@ function Onboarding1() {
           style={{
             width: '100%',
             height: '56px',
-            backgroundColor: '#E5385A',
+            backgroundColor: '#5B4AE6',
             color: 'white',
             fontSize: '16px',
             fontWeight: 700,

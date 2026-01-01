@@ -42,7 +42,7 @@ function ChatScreen() {
           display: 'flex',
           alignItems: 'center',
           gap: '12px',
-          borderBottom: '1px solid #E8E6EA'
+          borderBottom: '1px solid #E5E7EB'
         }}
       >
         {/* Back Button */}
@@ -52,7 +52,7 @@ function ChatScreen() {
             width: '44px',
             height: '44px',
             borderRadius: '15px',
-            border: '1px solid #E8E6EA',
+            border: '1px solid #E5E7EB',
             backgroundColor: 'transparent',
             display: 'flex',
             alignItems: 'center',
@@ -64,7 +64,7 @@ function ChatScreen() {
           <svg width="10" height="18" viewBox="0 0 12 20" fill="none">
             <path 
               d="M10 2L2 10L10 18" 
-              stroke="#E5385A" 
+              stroke="#5B4AE6" 
               strokeWidth="2" 
               strokeLinecap="round" 
               strokeLinejoin="round"
@@ -185,7 +185,7 @@ function ChatScreen() {
                   borderRadius: msg.sent 
                     ? '15px 15px 0 15px' 
                     : '15px 15px 15px 0',
-                  backgroundColor: msg.sent ? '#E5385A' : '#F3F3F3',
+                  backgroundColor: msg.sent ? '#5B4AE6' : '#F3F3F3',
                   color: msg.sent ? 'white' : '#231429',
                   fontSize: '14px',
                   lineHeight: 1.5
@@ -202,7 +202,7 @@ function ChatScreen() {
       <div 
         style={{ 
           padding: '12px 16px 24px 16px',
-          borderTop: '1px solid #E8E6EA',
+          borderTop: '1px solid #E5E7EB',
           display: 'flex',
           alignItems: 'center',
           gap: '12px'
@@ -256,7 +256,7 @@ function ChatScreen() {
             width: '48px',
             height: '48px',
             borderRadius: '15px',
-            backgroundColor: '#E5385A',
+            backgroundColor: '#5B4AE6',
             border: 'none',
             display: 'flex',
             alignItems: 'center',

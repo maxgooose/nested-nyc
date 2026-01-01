@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
  * Specs:
  * - Team size slider: 1-10+ members
  * - Duration slider: 1 week - 6 months
- * - Continue button: 56px height, 15px radius, #E5385A bg
+ * - Continue button: 56px height, 15px radius, #5B4AE6 bg
  */
 
 function FiltersScreen() {
@@ -39,7 +39,7 @@ function FiltersScreen() {
             width: '52px',
             height: '52px',
             borderRadius: '15px',
-            border: '1px solid #E8E6EA',
+            border: '1px solid #E5E7EB',
             backgroundColor: 'transparent',
             display: 'flex',
             alignItems: 'center',
@@ -50,7 +50,7 @@ function FiltersScreen() {
           <svg width="12" height="20" viewBox="0 0 12 20" fill="none">
             <path 
               d="M10 2L2 10L10 18" 
-              stroke="#E5385A" 
+              stroke="#5B4AE6" 
               strokeWidth="2" 
               strokeLinecap="round" 
               strokeLinejoin="round"
@@ -68,7 +68,7 @@ function FiltersScreen() {
               style={{ 
                 fontSize: '16px', 
                 fontWeight: 700, 
-                color: '#E5385A' 
+                color: '#5B4AE6' 
               }}
             >
               Team Size
@@ -77,7 +77,7 @@ function FiltersScreen() {
               style={{ 
                 fontSize: '14px', 
                 fontWeight: 600, 
-                color: '#E5385A' 
+                color: '#5B4AE6' 
               }}
             >
               {teamSize === 10 ? '10+' : teamSize} members
@@ -85,7 +85,7 @@ function FiltersScreen() {
           </div>
           
           {/* Custom Slider */}
-          <div style={{ position: 'relative', height: '4px', backgroundColor: '#E8E6EA', borderRadius: '2px' }}>
+          <div style={{ position: 'relative', height: '4px', backgroundColor: '#E5E7EB', borderRadius: '2px' }}>
             <div 
               style={{ 
                 position: 'absolute',
@@ -93,7 +93,7 @@ function FiltersScreen() {
                 top: 0,
                 height: '4px',
                 width: `${(teamSize / 10) * 100}%`,
-                backgroundColor: '#E5385A',
+                backgroundColor: '#5B4AE6',
                 borderRadius: '2px'
               }} 
             />
@@ -119,9 +119,9 @@ function FiltersScreen() {
                 top: '-8px',
                 width: '20px',
                 height: '20px',
-                backgroundColor: '#E5385A',
+                backgroundColor: '#5B4AE6',
                 borderRadius: '50%',
-                boxShadow: '0 2px 8px rgba(229, 56, 90, 0.4)'
+                boxShadow: '0 2px 8px rgba(109, 93, 246, 0.15)'
               }}
             />
           </div>
@@ -134,7 +134,7 @@ function FiltersScreen() {
               style={{ 
                 fontSize: '16px', 
                 fontWeight: 700, 
-                color: '#E5385A' 
+                color: '#5B4AE6' 
               }}
             >
               Project Duration
@@ -143,7 +143,7 @@ function FiltersScreen() {
               style={{ 
                 fontSize: '14px', 
                 fontWeight: 600, 
-                color: '#E5385A' 
+                color: '#5B4AE6' 
               }}
             >
               {formatDuration(duration.min)} - {formatDuration(duration.max)}
@@ -151,7 +151,7 @@ function FiltersScreen() {
           </div>
           
           {/* Dual Range Slider */}
-          <div style={{ position: 'relative', height: '4px', backgroundColor: '#E8E6EA', borderRadius: '2px' }}>
+          <div style={{ position: 'relative', height: '4px', backgroundColor: '#E5E7EB', borderRadius: '2px' }}>
             {/* Active range track */}
             <div 
               style={{ 
@@ -160,7 +160,7 @@ function FiltersScreen() {
                 right: `${100 - ((duration.max - 1) / (24 - 1)) * 100}%`,
                 top: 0,
                 height: '4px',
-                backgroundColor: '#E5385A',
+                backgroundColor: '#5B4AE6',
                 borderRadius: '2px'
               }} 
             />
@@ -173,9 +173,9 @@ function FiltersScreen() {
                 top: '-8px',
                 width: '20px',
                 height: '20px',
-                backgroundColor: '#E5385A',
+                backgroundColor: '#5B4AE6',
                 borderRadius: '50%',
-                boxShadow: '0 2px 8px rgba(229, 56, 90, 0.4)'
+                boxShadow: '0 2px 8px rgba(109, 93, 246, 0.15)'
               }}
             />
             
@@ -187,9 +187,9 @@ function FiltersScreen() {
                 top: '-8px',
                 width: '20px',
                 height: '20px',
-                backgroundColor: '#E5385A',
+                backgroundColor: '#5B4AE6',
                 borderRadius: '50%',
-                boxShadow: '0 2px 8px rgba(229, 56, 90, 0.4)'
+                boxShadow: '0 2px 8px rgba(109, 93, 246, 0.15)'
               }}
             />
             
@@ -249,7 +249,7 @@ function FiltersScreen() {
         style={{
           width: '100%',
           height: '56px',
-          backgroundColor: '#E5385A',
+          backgroundColor: '#5B4AE6',
           color: 'white',
           fontSize: '16px',
           fontWeight: 700,

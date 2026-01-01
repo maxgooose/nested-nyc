@@ -29,7 +29,7 @@ function Onboarding2() {
         {/* Title */}
         <h1 
           className="text-[28px] font-bold text-center"
-          style={{ color: '#E5385A' }}
+          style={{ color: '#5B4AE6' }}
         >
           Find Projects
         </h1>
@@ -51,7 +51,7 @@ function Onboarding2() {
               width: '8px', 
               height: '8px', 
               borderRadius: '50%', 
-              backgroundColor: '#E8E6EA' 
+              backgroundColor: '#E5E7EB' 
             }} 
           />
           <div 
@@ -59,7 +59,7 @@ function Onboarding2() {
               width: '8px', 
               height: '8px', 
               borderRadius: '50%', 
-              backgroundColor: '#E5385A' 
+              backgroundColor: '#5B4AE6' 
             }} 
           />
           <div 
@@ -67,7 +67,7 @@ function Onboarding2() {
               width: '8px', 
               height: '8px', 
               borderRadius: '50%', 
-              backgroundColor: '#E8E6EA' 
+              backgroundColor: '#E5E7EB' 
             }} 
           />
         </div>
@@ -81,7 +81,7 @@ function Onboarding2() {
           style={{
             width: '100%',
             height: '56px',
-            backgroundColor: '#E5385A',
+            backgroundColor: '#5B4AE6',
             color: 'white',
             fontSize: '16px',
             fontWeight: 700,

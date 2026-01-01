@@ -7,7 +7,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
  * Specs:
  * - Height: 83px total (includes home indicator area)
  * - Icons: 24x24px
- * - Active icon: #E5385A (filled)
+ * - Active icon: #5B4AE6 (filled)
  * - Inactive icon: #ADAFBB (outline)
  * - 4 tabs: Discover (projects), My Projects, Messages (nests), Profile
  * - Home indicator: 134x5px black, 8px from bottom
@@ -36,7 +36,7 @@ function BottomNav() {
         right: 0,
         height: '83px',
         backgroundColor: 'white',
-        borderTop: '1px solid #E8E6EA'
+        borderTop: '1px solid #E5E7EB'
       }}
     >
       {/* Tab Icons */}
@@ -97,7 +97,7 @@ function BottomNav() {
 
 // Discover Projects Icon
 function CardsIcon({ active }) {
-  const color = active ? '#E5385A' : '#ADAFBB'
+  const color = active ? '#5B4AE6' : '#ADAFBB'
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
       {active ? (
@@ -119,7 +119,7 @@ function CardsIcon({ active }) {
 
 // My Projects Icon (saved/joined)
 function HeartIcon({ active }) {
-  const color = active ? '#E5385A' : '#ADAFBB'
+  const color = active ? '#5B4AE6' : '#ADAFBB'
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
       <path 
@@ -134,7 +134,7 @@ function HeartIcon({ active }) {
 
 // Nests & Messages Icon
 function ChatIcon({ active }) {
-  const color = active ? '#E5385A' : '#ADAFBB'
+  const color = active ? '#5B4AE6' : '#ADAFBB'
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
       <path 
@@ -155,7 +155,7 @@ function ChatIcon({ active }) {
 
 // Your Profile Icon
 function PersonIcon({ active }) {
-  const color = active ? '#E5385A' : '#ADAFBB'
+  const color = active ? '#5B4AE6' : '#ADAFBB'
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
       <circle 

@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router-dom'
  * Nested NYC – Student-only project network
  * 
  * Specs:
- * - Skip button: top right, 16px bold, #E5385A
+ * - Skip button: top right, 16px bold, #5B4AE6
  * - Illustration: Purple blob shapes with student icons
- * - Title: "Find classmates", 34px bold, #E5385A
- * - Description: 14px, #E5385A, centered
- * - Button: "See who's on Nested", 56px height, 15px radius, #E5385A bg
+ * - Title: "Find classmates", 34px bold, #5B4AE6
+ * - Description: 14px, #5B4AE6, centered
+ * - Button: "See who's on Nested", 56px height, 15px radius, #5B4AE6 bg
  * - Home indicator: 134x5px black, 8px from bottom
  */
 
@@ -34,7 +34,7 @@ function SearchFriendsScreen() {
           style={{
             fontSize: '16px',
             fontWeight: 700,
-            color: '#E5385A',
+            color: '#5B4AE6',
             backgroundColor: 'transparent',
             border: 'none',
             cursor: 'pointer'
@@ -64,7 +64,7 @@ function SearchFriendsScreen() {
           marginTop: '40px',
           fontSize: '34px',
           fontWeight: 700,
-          color: '#E5385A',
+          color: '#5B4AE6',
           textAlign: 'center'
         }}
       >
@@ -77,7 +77,7 @@ function SearchFriendsScreen() {
           marginTop: '12px',
           fontSize: '14px',
           lineHeight: 1.5,
-          color: '#E5385A',
+          color: '#5B4AE6',
           textAlign: 'center'
         }}
       >
@@ -95,7 +95,7 @@ function SearchFriendsScreen() {
         style={{
           width: '100%',
           height: '56px',
-          backgroundColor: '#E5385A',
+          backgroundColor: '#5B4AE6',
           color: 'white',
           fontSize: '16px',
           fontWeight: 700,
@@ -134,13 +134,13 @@ function ClassmatesIllustration() {
   return (
     <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
       {/* Large purple blob - back */}
-      <ellipse cx="85" cy="90" rx="55" ry="50" fill="#8A2387" opacity="0.3"/>
+      <ellipse cx="85" cy="90" rx="55" ry="50" fill="#4A3CD4" opacity="0.3"/>
       
       {/* Medium purple blob - middle */}
-      <ellipse cx="70" cy="75" rx="45" ry="42" fill="#8A2387" opacity="0.5"/>
+      <ellipse cx="70" cy="75" rx="45" ry="42" fill="#4A3CD4" opacity="0.5"/>
       
       {/* Small purple blob - front */}
-      <ellipse cx="80" cy="80" rx="35" ry="32" fill="#8A2387" opacity="0.8"/>
+      <ellipse cx="80" cy="80" rx="35" ry="32" fill="#4A3CD4" opacity="0.8"/>
       
       {/* Student icon 1 - left */}
       <g transform="translate(45, 55)">

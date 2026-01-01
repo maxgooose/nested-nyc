@@ -202,7 +202,7 @@ function MajorScreen() {
             width: '48px',
             height: '48px',
             borderRadius: '14px',
-            border: '1px solid #E8E6EA',
+            border: '1px solid #E5E7EB',
             backgroundColor: 'transparent',
             display: 'flex',
             alignItems: 'center',
@@ -213,7 +213,7 @@ function MajorScreen() {
           <svg width="10" height="18" viewBox="0 0 12 20" fill="none">
             <path 
               d="M10 2L2 10L10 18" 
-              stroke="#E5385A" 
+              stroke="#5B4AE6" 
               strokeWidth="2" 
               strokeLinecap="round" 
               strokeLinejoin="round"
@@ -230,7 +230,7 @@ function MajorScreen() {
                 width: step === 2 ? '20px' : '6px',
                 height: '6px',
                 borderRadius: '3px',
-                backgroundColor: step <= 2 ? '#E5385A' : '#E8E6EA',
+                backgroundColor: step <= 2 ? '#5B4AE6' : '#E5E7EB',
                 transition: 'all 0.3s ease'
               }}
             />
@@ -243,7 +243,7 @@ function MajorScreen() {
           style={{
             fontSize: '15px',
             fontWeight: 600,
-            color: '#E5385A',
+            color: '#5B4AE6',
             backgroundColor: 'transparent',
             border: 'none',
             cursor: 'pointer',
@@ -295,7 +295,7 @@ function MajorScreen() {
           {majors.map(major => {
             const isSelected = selectedMajor === major.id
             const IconComponent = MajorIcons[major.id]
-            const color = isSelected ? 'white' : '#E5385A'
+            const color = isSelected ? 'white' : '#5B4AE6'
             
             return (
               <button
@@ -310,8 +310,8 @@ function MajorScreen() {
                   padding: '12px 16px',
                   minWidth: '72px',
                   borderRadius: '16px',
-                  backgroundColor: isSelected ? '#E5385A' : 'transparent',
-                  border: isSelected ? '2px solid #E5385A' : '1.5px solid #E8E6EA',
+                  backgroundColor: isSelected ? '#5B4AE6' : 'transparent',
+                  border: isSelected ? '2px solid #5B4AE6' : '1.5px solid #E5E7EB',
                   cursor: 'pointer',
                   transition: 'all 0.2s ease',
                   transform: isSelected ? 'scale(1.02)' : 'scale(1)',
@@ -354,7 +354,7 @@ function MajorScreen() {
               style={{
                 fontSize: '13px',
                 fontWeight: 600,
-                color: '#E5385A'
+                color: '#5B4AE6'
               }}
             >
               {selectedLookingFor.length} selected
@@ -389,7 +389,7 @@ function MajorScreen() {
         {lookingForOptions.map(option => {
           const isSelected = selectedLookingFor.includes(option.id)
           const IconComponent = LookingForIcons[option.id]
-          const color = isSelected ? '#E5385A' : '#231429'
+          const color = isSelected ? '#5B4AE6' : '#231429'
           
           return (
             <button
@@ -403,8 +403,8 @@ function MajorScreen() {
                 gap: '8px',
                 padding: '12px 8px',
                 borderRadius: '16px',
-                backgroundColor: isSelected ? 'rgba(229, 56, 90, 0.08)' : '#FAFAFA',
-                border: isSelected ? '2px solid #E5385A' : '2px solid transparent',
+                backgroundColor: isSelected ? 'rgba(109, 93, 246, 0.08)' : '#FAFAFA',
+                border: isSelected ? '2px solid #5B4AE6' : '2px solid transparent',
                 cursor: 'pointer',
                 transition: 'all 0.15s ease',
                 transform: isSelected ? 'scale(1.02)' : 'scale(1)',
@@ -421,7 +421,7 @@ function MajorScreen() {
                     width: '16px',
                     height: '16px',
                     borderRadius: '50%',
-                    backgroundColor: '#E5385A',
+                    backgroundColor: '#5B4AE6',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center'
@@ -463,7 +463,7 @@ function MajorScreen() {
         style={{
           width: '100%',
           height: '54px',
-          backgroundColor: canContinue ? '#E5385A' : '#E8E6EA',
+          backgroundColor: canContinue ? '#5B4AE6' : '#E5E7EB',
           color: canContinue ? 'white' : '#ADAFBB',
           fontSize: '16px',
           fontWeight: 700,

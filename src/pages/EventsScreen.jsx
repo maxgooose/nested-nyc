@@ -98,7 +98,7 @@ function EventsScreen() {
             margin: 0,
             fontSize: '28px',
             fontWeight: 700,
-            color: '#E5385A'
+            color: '#5B4AE6'
           }}
         >
           Events
@@ -135,7 +135,7 @@ function EventsScreen() {
               padding: '8px 16px',
               borderRadius: '20px',
               border: 'none',
-              backgroundColor: selectedFilter === filter.id ? '#E5385A' : '#F5F5F5',
+              backgroundColor: selectedFilter === filter.id ? '#5B4AE6' : '#F5F5F5',
               color: selectedFilter === filter.id ? 'white' : '#666',
               fontSize: '13px',
               fontWeight: 600,
@@ -215,7 +215,7 @@ function EventsScreen() {
                   <span 
                     style={{ 
                       fontSize: '12px', 
-                      color: '#E5385A',
+                      color: '#5B4AE6',
                       fontWeight: 600
                     }}
                   >
@@ -240,7 +240,7 @@ function EventsScreen() {
               <button 
                 style={{
                   padding: '8px 16px',
-                  backgroundColor: '#E5385A',
+                  backgroundColor: '#5B4AE6',
                   color: 'white',
                   fontSize: '12px',
                   fontWeight: 600,
@@ -265,5 +265,8 @@ function EventsScreen() {
 }
 
 export default EventsScreen
+
+
+
 
 

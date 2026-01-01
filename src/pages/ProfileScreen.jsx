@@ -118,7 +118,7 @@ function ProfileScreen() {
             width: '44px',
             height: '44px',
             borderRadius: '12px',
-            border: '1px solid #E8E6EA',
+            border: '1px solid #E5E7EB',
             backgroundColor: 'transparent',
             display: 'flex',
             alignItems: 'center',
@@ -129,7 +129,7 @@ function ProfileScreen() {
           <svg width="10" height="16" viewBox="0 0 12 20" fill="none">
             <path 
               d="M10 2L2 10L10 18" 
-              stroke="#E5385A" 
+              stroke="#5B4AE6" 
               strokeWidth="2" 
               strokeLinecap="round" 
               strokeLinejoin="round"
@@ -146,7 +146,7 @@ function ProfileScreen() {
                 width: step === 1 ? '18px' : '6px',
                 height: '6px',
                 borderRadius: '3px',
-                backgroundColor: step === 1 ? '#E5385A' : '#E8E6EA'
+                backgroundColor: step === 1 ? '#5B4AE6' : '#E5E7EB'
               }}
             />
           ))}
@@ -158,7 +158,7 @@ function ProfileScreen() {
           style={{
             fontSize: '15px',
             fontWeight: 600,
-            color: '#E5385A',
+            color: '#5B4AE6',
             backgroundColor: 'transparent',
             border: 'none',
             cursor: 'pointer'
@@ -199,7 +199,7 @@ function ProfileScreen() {
               borderRadius: '24px',
               overflow: 'hidden',
               backgroundColor: '#F5F5F5',
-              border: '2px solid #E8E6EA'
+              border: '2px solid #E5E7EB'
             }}
           >
             <div 
@@ -226,13 +226,13 @@ function ProfileScreen() {
               width: '28px',
               height: '28px',
               borderRadius: '50%',
-              backgroundColor: '#E5385A',
+              backgroundColor: '#5B4AE6',
               border: '2px solid white',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
-              boxShadow: '0 2px 8px rgba(229, 56, 90, 0.3)'
+              boxShadow: '0 2px 8px rgba(109, 93, 246, 0.15)'
             }}
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
@@ -271,15 +271,15 @@ function ProfileScreen() {
               paddingLeft: '14px',
               paddingRight: '14px',
               borderRadius: '12px',
-              border: '1.5px solid #E8E6EA',
+              border: '1.5px solid #E5E7EB',
               fontSize: '15px',
               color: '#231429',
               outline: 'none',
               boxSizing: 'border-box',
               transition: 'border-color 0.2s ease'
             }}
-            onFocus={(e) => e.target.style.borderColor = '#E5385A'}
-            onBlur={(e) => e.target.style.borderColor = '#E8E6EA'}
+            onFocus={(e) => e.target.style.borderColor = '#5B4AE6'}
+            onBlur={(e) => e.target.style.borderColor = '#E5E7EB'}
           />
         </div>
         
@@ -309,15 +309,15 @@ function ProfileScreen() {
               paddingLeft: '14px',
               paddingRight: '14px',
               borderRadius: '12px',
-              border: '1.5px solid #E8E6EA',
+              border: '1.5px solid #E5E7EB',
               fontSize: '15px',
               color: '#231429',
               outline: 'none',
               boxSizing: 'border-box',
               transition: 'border-color 0.2s ease'
             }}
-            onFocus={(e) => e.target.style.borderColor = '#E5385A'}
-            onBlur={(e) => e.target.style.borderColor = '#E8E6EA'}
+            onFocus={(e) => e.target.style.borderColor = '#5B4AE6'}
+            onBlur={(e) => e.target.style.borderColor = '#E5E7EB'}
           />
         </div>
         
@@ -356,8 +356,8 @@ function ProfileScreen() {
                 paddingLeft: '14px',
                 paddingRight: '40px',
                 borderRadius: '12px',
-                border: selectedSchool ? '1.5px solid #E5385A' : '1.5px solid #E8E6EA',
-                backgroundColor: selectedSchool ? 'rgba(229, 56, 90, 0.04)' : 'white',
+                border: selectedSchool ? '1.5px solid #5B4AE6' : '1.5px solid #E5E7EB',
+                backgroundColor: selectedSchool ? 'rgba(109, 93, 246, 0.04)' : 'white',
                 fontSize: '15px',
                 color: '#231429',
                 outline: 'none',
@@ -379,7 +379,7 @@ function ProfileScreen() {
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                   <path 
                     d="M5 12L10 17L19 8" 
-                    stroke="#E5385A" 
+                    stroke="#5B4AE6" 
                     strokeWidth="2.5" 
                     strokeLinecap="round" 
                     strokeLinejoin="round"
@@ -406,7 +406,7 @@ function ProfileScreen() {
                 marginTop: '4px',
                 backgroundColor: 'white',
                 borderRadius: '12px',
-                border: '1px solid #E8E6EA',
+                border: '1px solid #E5E7EB',
                 boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
                 maxHeight: '180px',
                 overflowY: 'auto',
@@ -432,7 +432,7 @@ function ProfileScreen() {
                     gap: '10px'
                   }}
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E5385A" strokeWidth="2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B4AE6" strokeWidth="2">
                     <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
                     <path d="M6 12v5c3 3 9 3 12 0v-5"/>
                   </svg>
@@ -453,7 +453,7 @@ function ProfileScreen() {
         style={{
           width: '100%',
           height: '52px',
-          backgroundColor: canContinue ? '#E5385A' : '#E8E6EA',
+          backgroundColor: canContinue ? '#5B4AE6' : '#E5E7EB',
           color: canContinue ? 'white' : '#ADAFBB',
           fontSize: '16px',
           fontWeight: 600,

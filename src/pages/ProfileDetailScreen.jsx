@@ -88,7 +88,7 @@ function ProfileDetailScreen() {
               left: 0,
               right: 0,
               height: '120px',
-              background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%)'
+              background: '#5B4AE6 0%, rgba(0,0,0,0) 100%)'
             }}
           />
           
@@ -103,7 +103,7 @@ function ProfileDetailScreen() {
               padding: '6px 12px',
               fontSize: '12px',
               fontWeight: 600,
-              color: '#E5385A',
+              color: '#5B4AE6',
               boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
             }}
           >
@@ -141,7 +141,7 @@ function ProfileDetailScreen() {
                 <span 
                   key={idx}
                   style={{
-                    backgroundColor: '#E5385A',
+                    backgroundColor: '#5B4AE6',
                     color: 'white',
                     fontSize: '12px',
                     fontWeight: 600,
@@ -155,8 +155,8 @@ function ProfileDetailScreen() {
             </div>
             <span 
               style={{
-                backgroundColor: 'rgba(229, 56, 90, 0.1)',
-                color: '#E5385A',
+                backgroundColor: 'rgba(109, 93, 246, 0.1)',
+                color: '#5B4AE6',
                 fontSize: '12px',
                 fontWeight: 600,
                 padding: '5px 10px',
@@ -195,7 +195,7 @@ function ProfileDetailScreen() {
                   style={{
                     backgroundColor: '#FAFAFA',
                     color: '#231429',
-                    border: '1px solid #E8E6EA',
+                    border: '1px solid #E5E7EB',
                     fontSize: '13px',
                     fontWeight: 500,
                     padding: '8px 14px',
@@ -263,8 +263,8 @@ function ProfileDetailScreen() {
                   {/* Role Badge */}
                   <span 
                     style={{
-                      backgroundColor: 'rgba(229, 56, 90, 0.1)',
-                      color: '#E5385A',
+                      backgroundColor: 'rgba(109, 93, 246, 0.1)',
+                      color: '#5B4AE6',
                       fontSize: '11px',
                       fontWeight: 600,
                       padding: '4px 10px',
@@ -303,7 +303,7 @@ function ProfileDetailScreen() {
             width: '52px',
             height: '52px',
             borderRadius: '14px',
-            border: '1.5px solid #E8E6EA',
+            border: '1.5px solid #E5E7EB',
             backgroundColor: 'white',
             display: 'flex',
             alignItems: 'center',
@@ -322,7 +322,7 @@ function ProfileDetailScreen() {
           style={{
             flex: 1,
             height: '52px',
-            backgroundColor: '#E5385A',
+            backgroundColor: '#5B4AE6',
             color: 'white',
             fontSize: '16px',
             fontWeight: 600,

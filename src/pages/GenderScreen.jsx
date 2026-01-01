@@ -6,13 +6,13 @@ import { useNavigate } from 'react-router-dom'
  * Nested NYC – Student-only project network
  * 
  * Specs:
- * - Back button: 52x52px, 15px radius, border #E8E6EA
- * - Skip: 16px bold, #E5385A
+ * - Back button: 52x52px, 15px radius, border #E5E7EB
+ * - Skip: 16px bold, #5B4AE6
  * - Title: 34px bold, #231429
  * - Options: 58px height, 15px radius, gap 12px
- *   - Unselected: border #E8E6EA, text #231429
- *   - Selected: bg #E5385A, text white
- * - Continue btn: 56px, 15px radius, #E5385A bg
+ *   - Unselected: border #E5E7EB, text #231429
+ *   - Selected: bg #5B4AE6, text white
+ * - Continue btn: 56px, 15px radius, #5B4AE6 bg
  */
 
 function GenderScreen() {
@@ -46,7 +46,7 @@ function GenderScreen() {
             width: '52px',
             height: '52px',
             borderRadius: '15px',
-            border: '1px solid #E8E6EA',
+            border: '1px solid #E5E7EB',
             backgroundColor: 'transparent',
             display: 'flex',
             alignItems: 'center',
@@ -57,7 +57,7 @@ function GenderScreen() {
           <svg width="12" height="20" viewBox="0 0 12 20" fill="none">
             <path 
               d="M10 2L2 10L10 18" 
-              stroke="#E5385A" 
+              stroke="#5B4AE6" 
               strokeWidth="2" 
               strokeLinecap="round" 
               strokeLinejoin="round"
@@ -71,7 +71,7 @@ function GenderScreen() {
           style={{
             fontSize: '16px',
             fontWeight: 700,
-            color: '#E5385A',
+            color: '#5B4AE6',
             backgroundColor: 'transparent',
             border: 'none',
             cursor: 'pointer'
@@ -108,8 +108,8 @@ function GenderScreen() {
                 paddingLeft: '20px',
                 paddingRight: '20px',
                 borderRadius: '15px',
-                backgroundColor: isSelected ? '#E5385A' : 'transparent',
-                border: isSelected ? 'none' : '1px solid #E8E6EA',
+                backgroundColor: isSelected ? '#5B4AE6' : 'transparent',
+                border: isSelected ? 'none' : '1px solid #E5E7EB',
                 color: isSelected ? 'white' : '#231429',
                 display: 'flex',
                 alignItems: 'center',
@@ -155,7 +155,7 @@ function GenderScreen() {
         style={{
           width: '100%',
           height: '56px',
-          backgroundColor: '#E5385A',
+          backgroundColor: '#5B4AE6',
           color: 'white',
           fontSize: '16px',
           fontWeight: 700,

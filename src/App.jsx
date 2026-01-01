@@ -1,171 +1,339 @@
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+
+// Layout components
 import MobileFrame from './components/MobileFrame'
 import WebLayout from './components/WebLayout'
-import ChatDesktopLayout from './components/ChatDesktopLayout'
 
-// Pages - Exact Figma copies
+// Page components
 import SplashScreen from './pages/SplashScreen'
 import Onboarding1 from './pages/Onboarding1'
 import Onboarding2 from './pages/Onboarding2'
 import Onboarding3 from './pages/Onboarding3'
 import SignUpScreen from './pages/SignUpScreen'
-import PhoneScreen from './pages/PhoneScreen'
 import UniEmailScreen from './pages/UniEmailScreen'
 import VerifyScreen from './pages/VerifyScreen'
 import ProfileScreen from './pages/ProfileScreen'
-import GenderScreen from './pages/GenderScreen'
 import MajorScreen from './pages/MajorScreen'
+import GenderScreen from './pages/GenderScreen'
 import InterestsScreen from './pages/InterestsScreen'
-
-// New screens
 import SearchFriendsScreen from './pages/SearchFriendsScreen'
 import NotificationsScreen from './pages/NotificationsScreen'
 import DiscoverScreen from './pages/DiscoverScreen'
-import FiltersScreen from './pages/FiltersScreen'
-import ProfileDetailScreen from './pages/ProfileDetailScreen'
+import EventsScreen from './pages/EventsScreen'
 import MatchesScreen from './pages/MatchesScreen'
 import MessagesScreen from './pages/MessagesScreen'
 import ChatScreen from './pages/ChatScreen'
-import EventsScreen from './pages/EventsScreen'
+import FiltersScreen from './pages/FiltersScreen'
+import ProfileDetailScreen from './pages/ProfileDetailScreen'
 
 /**
- * App - Main Application Component
- * 
- * RESPONSIVE LAYOUT STRATEGY:
- * 
- * Desktop (≥1024px):
- * - All routes use WebLayout with top navigation
- * - Auth pages: Two-column (marketing + card)
- * - Form pages: Centered card with progress stepper
- * - App pages: Full content with optional sidebar
- * - Chat: Three-column layout
- * 
- * Tablet (768-1023px):
- * - Stacked layouts, still web-style
- * - No phone frame
- * 
- * Mobile (<768px):
- * - Falls back to MobileFrame (phone UI)
- * - Single column, touch-friendly
- * 
- * Route Categories:
- * - 'app': Main app pages (discover, matches, messages, etc.)
- * - 'auth': Auth/onboarding (signup, uni-email, onboarding/*)
- * - 'form': Profile setup (profile, major, gender, interests, etc.)
- * - 'chat': Chat pages (chat/:id)
- * - 'splash': Splash screen only
+ * useIsDesktop - Hook to detect desktop screen width
+ * Returns true when screen width is ≥1024px
  */
-
-// Routes that should use WebLayout (everything except splash and chat)
-const WEB_LAYOUT_ROUTES = [
-  '/discover', '/events', '/matches', '/messages', '/my-profile', '/filters', '/profile-detail',
-  '/signup', '/uni-email', '/verify', '/phone',
-  '/onboarding/1', '/onboarding/2', '/onboarding/3',
-  '/profile', '/major', '/gender', '/interests', '/search-friends', '/notifications'
-]
-
-// Routes that use chat layout
-const CHAT_ROUTES_PREFIX = '/chat/'
-
-function AppContent() {
-  const location = useLocation()
-  const isWebLayoutRoute = WEB_LAYOUT_ROUTES.includes(location.pathname)
-  const isChatRoute = location.pathname.startsWith(CHAT_ROUTES_PREFIX)
-  const isSplash = location.pathname === '/'
-  
-  // Build routes once
-  const buildRoutes = () => (
-    <Routes>
-      {/* Splash */}
-      <Route path="/" element={<SplashScreen />} />
-      
-      {/* Onboarding Flow */}
-      <Route path="/onboarding/1" element={<Onboarding1 />} />
-      <Route path="/onboarding/2" element={<Onboarding2 />} />
-      <Route path="/onboarding/3" element={<Onboarding3 />} />
-      
-      {/* Auth Flow */}
-      <Route path="/signup" element={<SignUpScreen />} />
-      <Route path="/uni-email" element={<UniEmailScreen />} />
-      <Route path="/phone" element={<PhoneScreen />} />
-      <Route path="/verify" element={<VerifyScreen />} />
-      
-      {/* Profile Setup Flow */}
-      <Route path="/profile" element={<ProfileScreen />} />
-      <Route path="/major" element={<MajorScreen />} />
-      <Route path="/gender" element={<GenderScreen />} />
-      <Route path="/interests" element={<InterestsScreen />} />
-      
-      {/* Permissions Flow */}
-      <Route path="/search-friends" element={<SearchFriendsScreen />} />
-      <Route path="/notifications" element={<NotificationsScreen />} />
-      
-      {/* Main App Screens */}
-      <Route path="/discover" element={<DiscoverScreen />} />
-      <Route path="/events" element={<EventsScreen />} />
-      <Route path="/filters" element={<FiltersScreen />} />
-      <Route path="/profile-detail" element={<ProfileDetailScreen />} />
-      <Route path="/matches" element={<MatchesScreen />} />
-      <Route path="/messages" element={<MessagesScreen />} />
-      <Route path="/chat/:id" element={<ChatScreen />} />
-      <Route path="/my-profile" element={<ProfileScreen />} />
-    </Routes>
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(
+    typeof window !== 'undefined' ? window.innerWidth >= 1024 : false
   )
 
-  // Chat routes - Three-column layout
-  if (isChatRoute) {
-    return (
-      <>
-        {/* Desktop/Tablet: Chat layout */}
-        <ChatDesktopLayout>
-          {buildRoutes()}
-        </ChatDesktopLayout>
-        
-        {/* Mobile: Phone frame */}
-        <div className="mobile-layout-wrapper">
-          <div className="desktop-preview">
-            <MobileFrame>
-              {buildRoutes()}
-            </MobileFrame>
-          </div>
-        </div>
-      </>
-    )
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024)
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  return isDesktop
+}
+
+/**
+ * Route categories for layout decisions
+ */
+// Routes that should use WebLayout on desktop (main app pages with sidebar)
+const DESKTOP_APP_ROUTES = ['/discover', '/events', '/matches', '/messages', '/my-profile', '/filters']
+
+// Auth/onboarding routes - use WebLayout with auth layout type on desktop
+const AUTH_ROUTES = ['/signup', '/uni-email', '/verify', '/onboarding/1', '/onboarding/2', '/onboarding/3']
+
+// Profile setup forms - use WebLayout with form layout type on desktop
+const FORM_ROUTES = ['/profile', '/major', '/gender', '/interests', '/search-friends', '/notifications']
+
+// Routes that should remain mobile-only (splash, profile-detail, chat)
+const MOBILE_ONLY_ROUTES = ['/', '/profile-detail']
+
+/**
+ * AppContent - Main routing component with responsive layout handling
+ */
+function AppContent() {
+  const location = useLocation()
+  const isDesktop = useIsDesktop()
+  const pathname = location.pathname
+  
+  // On desktop, redirect from splash/root to discover immediately
+  // This bypasses the landing screen on desktop
+  if (isDesktop && pathname === '/') {
+    return <Navigate to="/discover" replace />
+  }
+  
+  // Determine which layout to use based on route and screen size
+  const isAppRoute = DESKTOP_APP_ROUTES.includes(pathname)
+  const isAuthRoute = AUTH_ROUTES.includes(pathname)
+  const isFormRoute = FORM_ROUTES.includes(pathname)
+  const isChatRoute = pathname.startsWith('/chat/')
+  const isMobileOnlyRoute = MOBILE_ONLY_ROUTES.includes(pathname)
+  
+  // On desktop, use WebLayout for app, auth, form, and chat routes
+  const useDesktopLayout = isDesktop && (isAppRoute || isAuthRoute || isFormRoute || isChatRoute)
+  
+  // Determine layout type for WebLayout
+  const getLayoutType = () => {
+    if (isAuthRoute) return 'auth'
+    if (isFormRoute) return 'form'
+    if (isChatRoute) return 'chat'
+    return 'app'
   }
 
-  // Web layout routes (all except splash)
-  if (isWebLayoutRoute) {
-    return (
-      <>
-        {/* Desktop/Tablet: Web layout */}
-        <WebLayout>
-          {buildRoutes()}
-        </WebLayout>
-        
-        {/* Mobile: Phone frame */}
-        <div className="mobile-layout-wrapper">
-          <div className="desktop-preview">
-            <MobileFrame>
-              {buildRoutes()}
-            </MobileFrame>
-          </div>
-        </div>
-      </>
-    )
-  }
-
-  // Splash screen - Always mobile frame style
   return (
-    <div className="desktop-preview">
-      <MobileFrame>
-        {buildRoutes()}
-      </MobileFrame>
-    </div>
+    <Routes>
+      {/* Root/Splash - Mobile only, desktop redirects to /discover */}
+      <Route 
+        path="/" 
+        element={
+          <MobileFrame>
+            <SplashScreen />
+          </MobileFrame>
+        } 
+      />
+      
+      {/* Onboarding Routes */}
+      <Route 
+        path="/onboarding/1" 
+        element={
+          useDesktopLayout ? (
+            <WebLayout layoutType="auth"><Onboarding1 /></WebLayout>
+          ) : (
+            <MobileFrame><Onboarding1 /></MobileFrame>
+          )
+        } 
+      />
+      <Route 
+        path="/onboarding/2" 
+        element={
+          useDesktopLayout ? (
+            <WebLayout layoutType="auth"><Onboarding2 /></WebLayout>
+          ) : (
+            <MobileFrame><Onboarding2 /></MobileFrame>
+          )
+        } 
+      />
+      <Route 
+        path="/onboarding/3" 
+        element={
+          useDesktopLayout ? (
+            <WebLayout layoutType="auth"><Onboarding3 /></WebLayout>
+          ) : (
+            <MobileFrame><Onboarding3 /></MobileFrame>
+          )
+        } 
+      />
+      
+      {/* Auth Routes */}
+      <Route 
+        path="/signup" 
+        element={
+          useDesktopLayout ? (
+            <WebLayout layoutType="auth"><SignUpScreen /></WebLayout>
+          ) : (
+            <MobileFrame><SignUpScreen /></MobileFrame>
+          )
+        } 
+      />
+      <Route 
+        path="/uni-email" 
+        element={
+          useDesktopLayout ? (
+            <WebLayout layoutType="auth"><UniEmailScreen /></WebLayout>
+          ) : (
+            <MobileFrame><UniEmailScreen /></MobileFrame>
+          )
+        } 
+      />
+      <Route 
+        path="/verify" 
+        element={
+          useDesktopLayout ? (
+            <WebLayout layoutType="auth"><VerifyScreen /></WebLayout>
+          ) : (
+            <MobileFrame><VerifyScreen /></MobileFrame>
+          )
+        } 
+      />
+      
+      {/* Profile Setup Forms */}
+      <Route 
+        path="/profile" 
+        element={
+          useDesktopLayout ? (
+            <WebLayout layoutType="form"><ProfileScreen /></WebLayout>
+          ) : (
+            <MobileFrame><ProfileScreen /></MobileFrame>
+          )
+        } 
+      />
+      <Route 
+        path="/major" 
+        element={
+          useDesktopLayout ? (
+            <WebLayout layoutType="form"><MajorScreen /></WebLayout>
+          ) : (
+            <MobileFrame><MajorScreen /></MobileFrame>
+          )
+        } 
+      />
+      <Route 
+        path="/gender" 
+        element={
+          useDesktopLayout ? (
+            <WebLayout layoutType="form"><GenderScreen /></WebLayout>
+          ) : (
+            <MobileFrame><GenderScreen /></MobileFrame>
+          )
+        } 
+      />
+      <Route 
+        path="/interests" 
+        element={
+          useDesktopLayout ? (
+            <WebLayout layoutType="form"><InterestsScreen /></WebLayout>
+          ) : (
+            <MobileFrame><InterestsScreen /></MobileFrame>
+          )
+        } 
+      />
+      <Route 
+        path="/search-friends" 
+        element={
+          useDesktopLayout ? (
+            <WebLayout layoutType="form"><SearchFriendsScreen /></WebLayout>
+          ) : (
+            <MobileFrame><SearchFriendsScreen /></MobileFrame>
+          )
+        } 
+      />
+      <Route 
+        path="/notifications" 
+        element={
+          useDesktopLayout ? (
+            <WebLayout layoutType="form"><NotificationsScreen /></WebLayout>
+          ) : (
+            <MobileFrame><NotificationsScreen /></MobileFrame>
+          )
+        } 
+      />
+      
+      {/* Main App Routes */}
+      <Route 
+        path="/discover" 
+        element={
+          isDesktop ? (
+            <WebLayout layoutType="app"><DiscoverScreen /></WebLayout>
+          ) : (
+            <MobileFrame><DiscoverScreen /></MobileFrame>
+          )
+        } 
+      />
+      <Route 
+        path="/events" 
+        element={
+          isDesktop ? (
+            <WebLayout layoutType="app"><EventsScreen /></WebLayout>
+          ) : (
+            <MobileFrame><EventsScreen /></MobileFrame>
+          )
+        } 
+      />
+      <Route 
+        path="/matches" 
+        element={
+          isDesktop ? (
+            <WebLayout layoutType="app"><MatchesScreen /></WebLayout>
+          ) : (
+            <MobileFrame><MatchesScreen /></MobileFrame>
+          )
+        } 
+      />
+      <Route 
+        path="/messages" 
+        element={
+          isDesktop ? (
+            <WebLayout layoutType="app"><MessagesScreen /></WebLayout>
+          ) : (
+            <MobileFrame><MessagesScreen /></MobileFrame>
+          )
+        } 
+      />
+      <Route 
+        path="/filters" 
+        element={
+          isDesktop ? (
+            <WebLayout layoutType="app"><FiltersScreen /></WebLayout>
+          ) : (
+            <MobileFrame><FiltersScreen /></MobileFrame>
+          )
+        } 
+      />
+      
+      {/* Chat Route - uses chat layout on desktop */}
+      <Route 
+        path="/chat/:id" 
+        element={
+          isDesktop ? (
+            <WebLayout layoutType="chat"><ChatScreen /></WebLayout>
+          ) : (
+            <MobileFrame><ChatScreen /></MobileFrame>
+          )
+        } 
+      />
+      
+      {/* Profile Detail - Mobile frame always */}
+      <Route 
+        path="/profile-detail/:id" 
+        element={
+          <MobileFrame><ProfileDetailScreen /></MobileFrame>
+        } 
+      />
+      
+      {/* My Profile */}
+      <Route 
+        path="/my-profile" 
+        element={
+          isDesktop ? (
+            <WebLayout layoutType="app"><ProfileScreen /></WebLayout>
+          ) : (
+            <MobileFrame><ProfileScreen /></MobileFrame>
+          )
+        } 
+      />
+      
+      {/* Fallback - redirect to discover on desktop, splash on mobile */}
+      <Route 
+        path="*" 
+        element={<Navigate to={isDesktop ? '/discover' : '/'} replace />} 
+      />
+    </Routes>
   )
 }
 
+/**
+ * App - Root component with BrowserRouter
+ */
 function App() {
-  return <AppContent />
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
+  )
 }
 
 export default App

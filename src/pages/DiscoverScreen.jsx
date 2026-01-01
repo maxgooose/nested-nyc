@@ -160,7 +160,7 @@ function DiscoverScreen() {
               margin: 0,
               fontSize: '24px',
               fontWeight: 700,
-              color: '#E5385A'
+              color: '#5B4AE6'
             }}
           >
             Discover
@@ -184,7 +184,7 @@ function DiscoverScreen() {
             width: '52px',
             height: '52px',
             borderRadius: '15px',
-            border: '1px solid #E8E6EA',
+            border: '1px solid #E5E7EB',
             backgroundColor: 'transparent',
             display: 'flex',
             alignItems: 'center',
@@ -201,7 +201,7 @@ function DiscoverScreen() {
         style={{ 
           display: 'flex',
           marginTop: '16px',
-          borderBottom: '1px solid #E8E6EA'
+          borderBottom: '1px solid #E5E7EB'
         }}
       >
         <button
@@ -211,11 +211,11 @@ function DiscoverScreen() {
             padding: '14px 0',
             backgroundColor: 'transparent',
             border: 'none',
-            borderBottom: activeTab === 'projects' ? '2px solid #E5385A' : '2px solid transparent',
+            borderBottom: activeTab === 'projects' ? '2px solid #5B4AE6' : '2px solid transparent',
             cursor: 'pointer',
             fontSize: '14px',
             fontWeight: 600,
-            color: activeTab === 'projects' ? '#E5385A' : '#ADAFBB',
+            color: activeTab === 'projects' ? '#5B4AE6' : '#ADAFBB',
             transition: 'all 0.2s ease'
           }}
         >
@@ -228,11 +228,11 @@ function DiscoverScreen() {
             padding: '14px 0',
             backgroundColor: 'transparent',
             border: 'none',
-            borderBottom: activeTab === 'nests' ? '2px solid #E5385A' : '2px solid transparent',
+            borderBottom: activeTab === 'nests' ? '2px solid #5B4AE6' : '2px solid transparent',
             cursor: 'pointer',
             fontSize: '14px',
             fontWeight: 600,
-            color: activeTab === 'nests' ? '#E5385A' : '#ADAFBB',
+            color: activeTab === 'nests' ? '#5B4AE6' : '#ADAFBB',
             transition: 'all 0.2s ease'
           }}
         >
@@ -254,7 +254,7 @@ function DiscoverScreen() {
             <div 
               key={project.id}
               style={{
-                borderBottom: '1px solid #E8E6EA'
+                borderBottom: '1px solid #E5E7EB'
               }}
             >
               {/* Author Header */}
@@ -291,7 +291,7 @@ function DiscoverScreen() {
                 <button 
                   style={{
                     padding: '6px 16px',
-                    backgroundColor: '#E5385A',
+                    backgroundColor: '#5B4AE6',
                     color: 'white',
                     fontSize: '12px',
                     fontWeight: 600,
@@ -306,22 +306,13 @@ function DiscoverScreen() {
               
               {/* Project Image */}
               <div 
+                className="project-card-image"
                 onClick={() => navigate('/profile-detail', { state: { project } })}
-                style={{
-                  position: 'relative',
-                  width: '100%',
-                  aspectRatio: '4/3',
-                  cursor: 'pointer'
-                }}
+                style={{ cursor: 'pointer' }}
               >
                 <img 
                   src={project.image}
                   alt={project.title}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover'
-                  }}
                 />
                 {/* Category Badge */}
                 <div 
@@ -352,8 +343,8 @@ function DiscoverScreen() {
                     <span 
                       key={idx}
                       style={{
-                        backgroundColor: 'rgba(229, 56, 90, 0.1)',
-                        color: '#E5385A',
+                        backgroundColor: 'rgba(109, 93, 246, 0.1)',
+                        color: '#5B4AE6',
                         padding: '4px 8px',
                         borderRadius: '12px',
                         fontSize: '11px',
@@ -415,7 +406,7 @@ function DiscoverScreen() {
               marginBottom: '16px',
               fontSize: '14px', 
               fontWeight: 700, 
-              color: '#E5385A' 
+              color: '#5B4AE6' 
             }}
           >
             Suggested for you
@@ -486,8 +477,8 @@ function DiscoverScreen() {
                         key={idx}
                         style={{
                           fontSize: '10px',
-                          color: '#E5385A',
-                          backgroundColor: 'rgba(229, 56, 90, 0.1)',
+                          color: '#5B4AE6',
+                          backgroundColor: 'rgba(109, 93, 246, 0.1)',
                           padding: '2px 6px',
                           borderRadius: '8px'
                         }}
@@ -502,7 +493,7 @@ function DiscoverScreen() {
                 <button 
                   style={{
                     padding: '8px 18px',
-                    backgroundColor: '#E5385A',
+                    backgroundColor: '#5B4AE6',
                     color: 'white',
                     fontSize: '13px',
                     fontWeight: 600,
@@ -523,13 +514,13 @@ function DiscoverScreen() {
             style={{
               marginTop: '24px',
               padding: '20px',
-              backgroundColor: 'rgba(229, 56, 90, 0.05)',
+              backgroundColor: 'rgba(109, 93, 246, 0.05)',
               borderRadius: '15px',
-              border: '2px dashed rgba(229, 56, 90, 0.3)',
+              border: '2px dashed rgba(109, 93, 246, 0.15)',
               textAlign: 'center'
             }}
           >
-            <p style={{ margin: 0, fontSize: '14px', fontWeight: 600, color: '#E5385A' }}>
+            <p style={{ margin: 0, fontSize: '14px', fontWeight: 600, color: '#5B4AE6' }}>
               Can't find your community?
             </p>
             <button 
@@ -537,11 +528,11 @@ function DiscoverScreen() {
                 marginTop: '12px',
                 padding: '10px 24px',
                 backgroundColor: 'transparent',
-                color: '#E5385A',
+                color: '#5B4AE6',
                 fontSize: '14px',
                 fontWeight: 700,
                 borderRadius: '20px',
-                border: '2px solid #E5385A',
+                border: '2px solid #5B4AE6',
                 cursor: 'pointer'
               }}
             >
@@ -559,13 +550,13 @@ function DiscoverScreen() {
 
 function FilterIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E5385A" strokeWidth="2">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5B4AE6" strokeWidth="2">
       <line x1="4" y1="6" x2="20" y2="6"/>
       <line x1="8" y1="12" x2="20" y2="12"/>
       <line x1="4" y1="18" x2="20" y2="18"/>
-      <circle cx="6" cy="6" r="2" fill="#E5385A"/>
-      <circle cx="10" cy="12" r="2" fill="#E5385A"/>
-      <circle cx="6" cy="18" r="2" fill="#E5385A"/>
+      <circle cx="6" cy="6" r="2" fill="#5B4AE6"/>
+      <circle cx="10" cy="12" r="2" fill="#5B4AE6"/>
+      <circle cx="6" cy="18" r="2" fill="#5B4AE6"/>
     </svg>
   )
 }

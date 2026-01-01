@@ -31,7 +31,7 @@ function Onboarding3() {
         {/* Title */}
         <h1 
           className="text-[28px] font-bold text-center"
-          style={{ color: '#E5385A' }}
+          style={{ color: '#5B4AE6' }}
         >
           Join Nests
         </h1>
@@ -53,7 +53,7 @@ function Onboarding3() {
               width: '8px', 
               height: '8px', 
               borderRadius: '50%', 
-              backgroundColor: '#E8E6EA' 
+              backgroundColor: '#E5E7EB' 
             }} 
           />
           <div 
@@ -61,7 +61,7 @@ function Onboarding3() {
               width: '8px', 
               height: '8px', 
               borderRadius: '50%', 
-              backgroundColor: '#E8E6EA' 
+              backgroundColor: '#E5E7EB' 
             }} 
           />
           <div 
@@ -69,7 +69,7 @@ function Onboarding3() {
               width: '8px', 
               height: '8px', 
               borderRadius: '50%', 
-              backgroundColor: '#E5385A' 
+              backgroundColor: '#5B4AE6' 
             }} 
           />
         </div>
@@ -83,7 +83,7 @@ function Onboarding3() {
           style={{
             width: '100%',
             height: '56px',
-            backgroundColor: '#E5385A',
+            backgroundColor: '#5B4AE6',
             color: 'white',
             fontSize: '16px',
             fontWeight: 700,
@@ -101,7 +101,7 @@ function Onboarding3() {
           onClick={() => navigate('/signup')}
           style={{
             backgroundColor: 'transparent',
-            color: '#E5385A',
+            color: '#5B4AE6',
             fontSize: '16px',
             fontWeight: 700,
             border: 'none',

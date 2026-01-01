@@ -134,7 +134,7 @@ function MessagesScreen() {
             margin: 0,
             fontSize: '28px',
             fontWeight: 700,
-            color: '#E5385A'
+            color: '#5B4AE6'
           }}
         >
           Messages
@@ -149,13 +149,13 @@ function MessagesScreen() {
             padding: '8px'
           }}
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E5385A" strokeWidth="2">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5B4AE6" strokeWidth="2">
             <line x1="4" y1="6" x2="20" y2="6"/>
             <line x1="8" y1="12" x2="20" y2="12"/>
             <line x1="4" y1="18" x2="20" y2="18"/>
-            <circle cx="6" cy="6" r="2" fill="#E5385A"/>
-            <circle cx="10" cy="12" r="2" fill="#E5385A"/>
-            <circle cx="6" cy="18" r="2" fill="#E5385A"/>
+            <circle cx="6" cy="6" r="2" fill="#5B4AE6"/>
+            <circle cx="10" cy="12" r="2" fill="#5B4AE6"/>
+            <circle cx="6" cy="18" r="2" fill="#5B4AE6"/>
           </svg>
         </button>
       </div>
@@ -196,7 +196,7 @@ function MessagesScreen() {
         style={{ 
           display: 'flex',
           marginTop: '20px',
-          borderBottom: '1px solid #E8E6EA'
+          borderBottom: '1px solid #E5E7EB'
         }}
       >
         <button
@@ -206,11 +206,11 @@ function MessagesScreen() {
             padding: '14px 0',
             backgroundColor: 'transparent',
             border: 'none',
-            borderBottom: activeTab === 'general' ? '2px solid #E5385A' : '2px solid transparent',
+            borderBottom: activeTab === 'general' ? '2px solid #5B4AE6' : '2px solid transparent',
             cursor: 'pointer',
             fontSize: '14px',
             fontWeight: 600,
-            color: activeTab === 'general' ? '#E5385A' : '#ADAFBB',
+            color: activeTab === 'general' ? '#5B4AE6' : '#ADAFBB',
             transition: 'all 0.2s ease'
           }}
         >
@@ -223,11 +223,11 @@ function MessagesScreen() {
             padding: '14px 0',
             backgroundColor: 'transparent',
             border: 'none',
-            borderBottom: activeTab === 'nests' ? '2px solid #E5385A' : '2px solid transparent',
+            borderBottom: activeTab === 'nests' ? '2px solid #5B4AE6' : '2px solid transparent',
             cursor: 'pointer',
             fontSize: '14px',
             fontWeight: 600,
-            color: activeTab === 'nests' ? '#E5385A' : '#ADAFBB',
+            color: activeTab === 'nests' ? '#5B4AE6' : '#ADAFBB',
             transition: 'all 0.2s ease'
           }}
         >
@@ -307,7 +307,7 @@ function MessagesScreen() {
                     margin: 0, 
                     marginTop: '4px',
                     fontSize: '14px', 
-                    color: msg.unread ? '#E5385A' : '#ADAFBB',
+                    color: msg.unread ? '#5B4AE6' : '#ADAFBB',
                     fontWeight: msg.unread ? 600 : 400,
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
@@ -348,7 +348,7 @@ function MessagesScreen() {
                 paddingLeft: '20px',
                 fontSize: '14px', 
                 fontWeight: 700, 
-                color: '#E5385A' 
+                color: '#5B4AE6' 
               }}
             >
               Your Nests
@@ -381,7 +381,7 @@ function MessagesScreen() {
                       height: '60px',
                       borderRadius: '18px',
                       overflow: 'hidden',
-                      border: nest.isNew ? '2px dashed #E5385A' : '2px solid #E5385A'
+                      border: nest.isNew ? '2px dashed #5B4AE6' : '2px solid #5B4AE6'
                     }}
                   >
                     {nest.isNew ? (
@@ -392,10 +392,10 @@ function MessagesScreen() {
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          backgroundColor: 'rgba(229, 56, 90, 0.1)'
+                          backgroundColor: 'rgba(109, 93, 246, 0.1)'
                         }}
                       >
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E5385A" strokeWidth="2">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5B4AE6" strokeWidth="2">
                           <line x1="12" y1="5" x2="12" y2="19"/>
                           <line x1="5" y1="12" x2="19" y2="12"/>
                         </svg>
@@ -429,7 +429,7 @@ function MessagesScreen() {
                 margin: 0, 
                 fontSize: '14px', 
                 fontWeight: 700, 
-                color: '#E5385A' 
+                color: '#5B4AE6' 
               }}
             >
               Group Chats
@@ -471,7 +471,7 @@ function MessagesScreen() {
                       position: 'absolute',
                       bottom: '-2px',
                       right: '-2px',
-                      backgroundColor: '#E5385A',
+                      backgroundColor: '#5B4AE6',
                       color: 'white',
                       fontSize: '10px',
                       fontWeight: 600,
@@ -501,7 +501,7 @@ function MessagesScreen() {
                       margin: 0, 
                       marginTop: '4px',
                       fontSize: '14px', 
-                      color: msg.unread ? '#E5385A' : '#ADAFBB',
+                      color: msg.unread ? '#5B4AE6' : '#ADAFBB',
                       fontWeight: msg.unread ? 600 : 400,
                       whiteSpace: 'nowrap',
                       overflow: 'hidden',
@@ -529,7 +529,7 @@ function MessagesScreen() {
                         width: '8px',
                         height: '8px',
                         borderRadius: '50%',
-                        backgroundColor: '#E5385A'
+                        backgroundColor: '#5B4AE6'
                       }}
                     />
                   )}

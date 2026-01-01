@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router-dom'
  * EXACT Figma Copy
  * 
  * Specs from Figma:
- * - Skip button: top right, 16px bold, #E5385A
+ * - Skip button: top right, 16px bold, #5B4AE6
  * - Illustration: Orange/yellow chat bubble icons, centered
- * - Title: "Enable notifications", 34px bold, #E5385A
- * - Description: 14px, #E5385A, centered, line-height 1.5
- * - Button: "I want to be notified", 56px height, 15px radius, #E5385A bg
+ * - Title: "Enable notifications", 34px bold, #5B4AE6
+ * - Description: 14px, #5B4AE6, centered, line-height 1.5
+ * - Button: "I want to be notified", 56px height, 15px radius, #5B4AE6 bg
  * - Home indicator: 134x5px black, 8px from bottom
  */
 
@@ -34,7 +34,7 @@ function NotificationsScreen() {
           style={{
             fontSize: '16px',
             fontWeight: 700,
-            color: '#E5385A',
+            color: '#5B4AE6',
             backgroundColor: 'transparent',
             border: 'none',
             cursor: 'pointer'
@@ -64,7 +64,7 @@ function NotificationsScreen() {
           marginTop: '40px',
           fontSize: '34px',
           fontWeight: 700,
-          color: '#E5385A',
+          color: '#5B4AE6',
           textAlign: 'center'
         }}
       >
@@ -77,7 +77,7 @@ function NotificationsScreen() {
           marginTop: '12px',
           fontSize: '14px',
           lineHeight: 1.5,
-          color: '#E5385A',
+          color: '#5B4AE6',
           textAlign: 'center'
         }}
       >
@@ -95,7 +95,7 @@ function NotificationsScreen() {
         style={{
           width: '100%',
           height: '56px',
-          backgroundColor: '#E5385A',
+          backgroundColor: '#5B4AE6',
           color: 'white',
           fontSize: '16px',
           fontWeight: 700,

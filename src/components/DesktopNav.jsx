@@ -72,16 +72,16 @@ function DesktopNav() {
   )
 }
 
-// Nested Logo SVG
+// Nested Logo SVG - Uses purple accent color
 function NestedLogo() {
   return (
     <svg width="32" height="32" viewBox="0 0 48 48" fill="none">
       {/* Outer nest circle */}
-      <circle cx="24" cy="24" r="22" stroke="#E5385A" strokeWidth="2" fill="none" />
+      <circle cx="24" cy="24" r="22" stroke="#5B4AE6" strokeWidth="2" fill="none" />
       {/* Inner nest circle */}
-      <circle cx="24" cy="24" r="14" stroke="#E5385A" strokeWidth="2" fill="none" />
+      <circle cx="24" cy="24" r="14" stroke="#5B4AE6" strokeWidth="2" fill="none" />
       {/* Center dot/egg */}
-      <circle cx="24" cy="24" r="6" fill="#E5385A" />
+      <circle cx="24" cy="24" r="6" fill="#5B4AE6" />
     </svg>
   )
 }
@@ -97,5 +97,8 @@ function NotificationIcon() {
 }
 
 export default DesktopNav
+
+
+
 
 

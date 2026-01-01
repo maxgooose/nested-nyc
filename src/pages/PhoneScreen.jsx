@@ -8,14 +8,14 @@ import { useNavigate } from 'react-router-dom'
  * Precise measurements:
  * - Screen padding: 40px horizontal
  * - Top padding: 130px
- * - Title: "My mobile", 34px bold, #E5385A, left-aligned
+ * - Title: "My mobile", 34px bold, #5B4AE6, left-aligned
  * - Title-desc gap: 10px
- * - Description: 14px, #E5385A, line-height 1.5
+ * - Description: 14px, #5B4AE6, line-height 1.5
  * - Input margin-top: 40px
- * - Input height: 58px, border-radius 15px, border #E8E6EA
+ * - Input height: 58px, border-radius 15px, border #E5E7EB
  * - Country selector: flag + code + chevron, separated by border-right
  * - Button margin-top: 48px
- * - Button: 56px height, 15px radius, #E5385A bg
+ * - Button: 56px height, 15px radius, #5B4AE6 bg
  * - Home indicator: 134x5px black, 8px from bottom
  */
 
@@ -35,7 +35,7 @@ function PhoneScreen() {
           style={{ 
             fontSize: '34px',
             fontWeight: 700,
-            color: '#E5385A',
+            color: '#5B4AE6',
             margin: 0,
             letterSpacing: 'normal',
             wordSpacing: 'normal'
@@ -51,7 +51,7 @@ function PhoneScreen() {
             marginTop: '10px',
             fontSize: '14px',
             lineHeight: 1.5,
-            color: '#E5385A'
+            color: '#5B4AE6'
           }}
         >
           Please enter your valid phone number. We will
@@ -68,7 +68,7 @@ function PhoneScreen() {
             alignItems: 'center',
             height: '58px',
             borderRadius: '15px',
-            border: '1px solid #E8E6EA',
+            border: '1px solid #E5E7EB',
             overflow: 'hidden'
           }}
         >
@@ -81,7 +81,7 @@ function PhoneScreen() {
               paddingLeft: '16px',
               paddingRight: '16px',
               height: '100%',
-              borderRight: '1px solid #E8E6EA'
+              borderRight: '1px solid #E5E7EB'
             }}
           >
             <span style={{ fontSize: '20px' }}>🇺🇸</span>
@@ -124,7 +124,7 @@ function PhoneScreen() {
           marginTop: '48px',
           width: '100%',
           height: '56px',
-          backgroundColor: '#E5385A',
+          backgroundColor: '#5B4AE6',
           color: 'white',
           fontSize: '16px',
           fontWeight: 700,

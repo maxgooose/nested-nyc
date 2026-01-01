@@ -130,9 +130,9 @@ function AuthDesktopLayout({ children, variant = 'signup', headline, description
 function NestedLogo() {
   return (
     <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-      <circle cx="24" cy="24" r="22" stroke="#E5385A" strokeWidth="2" fill="none" />
-      <circle cx="24" cy="24" r="14" stroke="#E5385A" strokeWidth="2" fill="none" />
-      <circle cx="24" cy="24" r="6" fill="#E5385A" />
+      <circle cx="24" cy="24" r="22" stroke="#5B4AE6" strokeWidth="2" fill="none" />
+      <circle cx="24" cy="24" r="14" stroke="#5B4AE6" strokeWidth="2" fill="none" />
+      <circle cx="24" cy="24" r="6" fill="#5B4AE6" />
     </svg>
   )
 }
@@ -141,12 +141,15 @@ function NestedLogo() {
 function CheckIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="10" fill="rgba(229, 56, 90, 0.1)" />
-      <path d="M8 12L11 15L16 9" stroke="#E5385A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="12" cy="12" r="10" fill="rgba(109, 93, 246, 0.1)" />
+      <path d="M8 12L11 15L16 9" stroke="#5B4AE6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
 
 export default AuthDesktopLayout
+
+
+
 
 

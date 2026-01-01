@@ -7,15 +7,15 @@ import { authService, getErrorMessage } from '../lib/supabase'
  * EXACT Figma Copy
  * 
  * Precise measurements:
- * - Back button: 52x52px, 15px radius, border #E8E6EA, top 44px, left 40px
- * - Timer: 34px bold, #E5385A, centered, margin-top 32px from back
- * - Instructions: 18px, #E5385A, centered, margin-top 10px
+ * - Back button: 52x52px, 15px radius, border #E5E7EB, top 44px, left 40px
+ * - Timer: 34px bold, #5B4AE6, centered, margin-top 32px from back
+ * - Instructions: 18px, #5B4AE6, centered, margin-top 10px
  * - Code boxes: 4x 60x60px, 15px radius, gap 12px, margin-top 40px
- *   - Filled: bg #E5385A, text white
- *   - Active (next): border #E5385A, text pink
- *   - Empty: border #E8E6EA, text gray
+ *   - Filled: bg #5B4AE6, text white
+ *   - Active (next): border #5B4AE6, text pink
+ *   - Empty: border #E5E7EB, text gray
  * - Number pad: 3 columns, 24px text, row gap 32px, margin-top 40px
- * - Send again: 16px bold, #E5385A, margin-top 32px
+ * - Send again: 16px bold, #5B4AE6, margin-top 32px
  */
 
 function VerifyScreen() {
@@ -127,20 +127,20 @@ function VerifyScreen() {
     
     if (isFilled) {
       return {
-        backgroundColor: '#E5385A',
+        backgroundColor: '#5B4AE6',
         border: 'none',
         color: 'white'
       }
     } else if (isActive) {
       return {
         backgroundColor: 'transparent',
-        border: '1px solid #E5385A',
-        color: '#E5385A'
+        border: '1px solid #5B4AE6',
+        color: '#5B4AE6'
       }
     } else {
       return {
         backgroundColor: 'transparent',
-        border: '1px solid #E8E6EA',
+        border: '1px solid #E5E7EB',
         color: '#ADAFBB'
       }
     }
@@ -159,7 +159,7 @@ function VerifyScreen() {
             width: '52px',
             height: '52px',
             borderRadius: '15px',
-            border: '1px solid #E8E6EA',
+            border: '1px solid #E5E7EB',
             backgroundColor: 'transparent',
             display: 'flex',
             alignItems: 'center',
@@ -170,7 +170,7 @@ function VerifyScreen() {
           <svg width="12" height="20" viewBox="0 0 12 20" fill="none">
             <path 
               d="M10 2L2 10L10 18" 
-              stroke="#E5385A" 
+              stroke="#5B4AE6" 
               strokeWidth="2" 
               strokeLinecap="round" 
               strokeLinejoin="round"
@@ -185,7 +185,7 @@ function VerifyScreen() {
           style={{ 
             fontSize: '34px',
             fontWeight: 700,
-            color: '#E5385A',
+            color: '#5B4AE6',
             margin: 0
           }}
         >
@@ -198,7 +198,7 @@ function VerifyScreen() {
         style={{ 
           marginTop: '10px',
           fontSize: '18px',
-          color: '#E5385A',
+          color: '#5B4AE6',
           textAlign: 'center',
           lineHeight: 1.4
         }}
@@ -229,15 +229,15 @@ function VerifyScreen() {
             fill="none" 
             style={{ flexShrink: 0, marginTop: '2px' }}
           >
-            <circle cx="12" cy="12" r="10" stroke="#E5385A" strokeWidth="2" fill="none"/>
-            <path d="M12 8v4M12 16h.01" stroke="#E5385A" strokeWidth="2" strokeLinecap="round"/>
+            <circle cx="12" cy="12" r="10" stroke="#5B4AE6" strokeWidth="2" fill="none"/>
+            <path d="M12 8v4M12 16h.01" stroke="#5B4AE6" strokeWidth="2" strokeLinecap="round"/>
           </svg>
           <p 
             style={{
               margin: 0,
               fontSize: '13px',
               lineHeight: 1.5,
-              color: '#E5385A',
+              color: '#5B4AE6',
               flex: 1
             }}
           >
@@ -315,7 +315,7 @@ function VerifyScreen() {
                 backgroundColor: 'transparent',
                 border: 'none',
                 cursor: 'pointer',
-                color: '#E5385A'
+                color: '#5B4AE6'
               }}
             >
               {num}
@@ -333,7 +333,7 @@ function VerifyScreen() {
               backgroundColor: 'transparent',
               border: 'none',
               cursor: 'pointer',
-              color: '#E5385A'
+              color: '#5B4AE6'
             }}
           >
             0
@@ -358,12 +358,12 @@ function VerifyScreen() {
                 width="22" 
                 height="16" 
                 rx="3" 
-                stroke="#E5385A" 
+                stroke="#5B4AE6" 
                 strokeWidth="1.5"
               />
               <path 
                 d="M15 5L9 13M9 5L15 13" 
-                stroke="#E5385A" 
+                stroke="#5B4AE6" 
                 strokeWidth="1.5" 
                 strokeLinecap="round"
               />
@@ -383,7 +383,7 @@ function VerifyScreen() {
           backgroundColor: 'transparent',
           border: 'none',
           cursor: (timer > 0 || isVerifying) ? 'not-allowed' : 'pointer',
-          color: (timer > 0 || isVerifying) ? '#ADAFBB' : '#E5385A',
+          color: (timer > 0 || isVerifying) ? '#ADAFBB' : '#5B4AE6',
           opacity: (timer > 0 || isVerifying) ? 0.5 : 1
         }}
       >

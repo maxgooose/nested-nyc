@@ -6,15 +6,15 @@ import { useNavigate } from 'react-router-dom'
  * Nested NYC – Student-only project network
  * 
  * Specs:
- * - Back button: 52x52px, 15px radius, border #E8E6EA
- * - Skip: 16px bold, #E5385A
- * - Title: 34px bold italic, #E5385A
- * - Subtitle: 14px, #E5385A
+ * - Back button: 52x52px, 15px radius, border #E5E7EB
+ * - Skip: 16px bold, #5B4AE6
+ * - Title: 34px bold italic, #5B4AE6
+ * - Subtitle: 14px, #5B4AE6
  * - Grid: 2 columns, gap 10px
  * - Tags: 46px height, 15px radius, line icons
- *   - Unselected: border #E8E6EA, icon+text #E5385A
- *   - Selected: bg #E5385A, icon+text white
- * - Continue btn: 56px height, 15px radius, #E5385A bg
+ *   - Unselected: border #E5E7EB, icon+text #5B4AE6
+ *   - Selected: bg #5B4AE6, icon+text white
+ * - Continue btn: 56px height, 15px radius, #5B4AE6 bg
  */
 
 // Skill icon components
@@ -172,7 +172,7 @@ function InterestsScreen() {
             width: '52px',
             height: '52px',
             borderRadius: '15px',
-            border: '1px solid #E8E6EA',
+            border: '1px solid #E5E7EB',
             backgroundColor: 'transparent',
             display: 'flex',
             alignItems: 'center',
@@ -183,7 +183,7 @@ function InterestsScreen() {
           <svg width="12" height="20" viewBox="0 0 12 20" fill="none">
             <path 
               d="M10 2L2 10L10 18" 
-              stroke="#E5385A" 
+              stroke="#5B4AE6" 
               strokeWidth="2" 
               strokeLinecap="round" 
               strokeLinejoin="round"
@@ -197,7 +197,7 @@ function InterestsScreen() {
           style={{
             fontSize: '16px',
             fontWeight: 700,
-            color: '#E5385A',
+            color: '#5B4AE6',
             backgroundColor: 'transparent',
             border: 'none',
             cursor: 'pointer'
@@ -215,7 +215,7 @@ function InterestsScreen() {
           fontSize: '34px',
           fontWeight: 700,
           fontStyle: 'italic',
-          color: '#E5385A'
+          color: '#5B4AE6'
         }}
       >
         Your skills
@@ -227,7 +227,7 @@ function InterestsScreen() {
           marginTop: '8px',
           fontSize: '14px',
           lineHeight: 1.5,
-          color: '#E5385A'
+          color: '#5B4AE6'
         }}
       >
         Select a few of your skills and let teams
@@ -249,7 +249,7 @@ function InterestsScreen() {
       >
         {skills.map(skill => {
           const isSelected = selected.includes(skill.id)
-          const color = isSelected ? 'white' : '#E5385A'
+          const color = isSelected ? 'white' : '#5B4AE6'
           const IconComponent = icons[skill.id]
           
           return (
@@ -261,8 +261,8 @@ function InterestsScreen() {
                 paddingLeft: '14px',
                 paddingRight: '14px',
                 borderRadius: '15px',
-                backgroundColor: isSelected ? '#E5385A' : 'transparent',
-                border: isSelected ? 'none' : '1px solid #E8E6EA',
+                backgroundColor: isSelected ? '#5B4AE6' : 'transparent',
+                border: isSelected ? 'none' : '1px solid #E5E7EB',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
@@ -285,7 +285,7 @@ function InterestsScreen() {
         style={{
           width: '100%',
           height: '56px',
-          backgroundColor: '#E5385A',
+          backgroundColor: '#5B4AE6',
           color: 'white',
           fontSize: '16px',
           fontWeight: 700,
