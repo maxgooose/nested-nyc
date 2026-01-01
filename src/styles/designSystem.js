@@ -1,48 +1,36 @@
 /**
  * NESTED App Design System
- * Updated with purple accent color scheme
+ * Extracted from Figma - HeartLove Dating Mobile App
  * 
  * This file contains all design tokens for consistent styling
  */
 
 export const colors = {
-  // Primary Colors (Purple accent - professional, credible tone)
-  primary: '#5B4AE6',        // Main purple - buttons, titles, accents
-  primaryDark: '#4A3CD4',    // Darker shade for hover states
-  primaryLight: '#EEEAFE',   // Light purple for backgrounds
+  // Primary Colors
+  primary: '#E5385A',      // Main pink/red - buttons, titles, accents (vibrant coral-red)
+  primaryDark: '#D42E4F',  // Darker shade for hover states
+  
+  // Secondary Colors  
+  secondary: '#8A2387',    // Purple accent
   
   // Neutral Colors
-  bg: '#FFFFFF',
-  surface: '#FFFFFF',
-  surface2: '#F6F7FB',
-  surface3: '#EEF0F6',
-  
-  // Text Colors
-  textPrimary: '#111827',
-  textSecondary: '#6B7280',
-  textTertiary: '#9CA3AF',
-  
-  // Border
-  border: '#E5E7EB',
-  
-  // Legacy (keeping for compatibility)
-  dark: '#111827',
-  white: '#FFFFFF',
+  dark: '#231429',         // Dark text, home indicator
+  white: '#FFFFFF',        // Backgrounds
   
   // Gray Scale
-  gray100: '#F6F7FB',
-  gray200: '#E5E7EB',
-  gray300: '#9CA3AF',
-  gray400: '#6B7280',
+  gray100: '#F3F3F3',      // Light backgrounds
+  gray200: '#E8E6EA',      // Borders, dividers
+  gray300: '#ADAFBB',      // Placeholder text, descriptions
+  gray400: '#323755',      // Secondary text
   
   // Pagination
-  dotActive: '#5B4AE6',
-  dotInactive: '#E5E7EB',
+  dotActive: '#E5385A',
+  dotInactive: '#E8E6EA',
 }
 
 export const typography = {
-  // Font Family
-  fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+  // Font Family - Sk-Modernist (fallback to system fonts)
+  fontFamily: "'SK-Modernist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
   
   // Font Sizes
   sizes: {
@@ -110,14 +98,12 @@ export const borderRadius = {
 }
 
 export const shadows = {
-  // Card shadows - neutral only, no colored shadows
-  sm: '0 1px 2px rgba(0, 0, 0, 0.05)',
-  md: '0 4px 12px rgba(0, 0, 0, 0.08)',
-  card: '0 4px 12px rgba(0, 0, 0, 0.08)',
-  cardHover: '0 8px 20px rgba(0, 0, 0, 0.1)',
+  // Card shadows
+  card: '0 4px 15px rgba(0, 0, 0, 0.08)',
+  cardHover: '0 8px 25px rgba(0, 0, 0, 0.12)',
   
-  // Button shadow - neutral only
-  button: '0 4px 12px rgba(0, 0, 0, 0.1)',
+  // Button shadow
+  button: '0 10px 30px rgba(229, 56, 90, 0.3)',
 }
 
 // Screen dimensions (iPhone frame)
@@ -191,3 +177,4 @@ export default {
   screen,
   components,
 }
+

@@ -1,87 +1,32 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import BottomNav from '../components/BottomNav'
+import { getUpcomingEvents, getPastEvents } from '../utils/eventData'
 
 /**
- * EventsScreen - Discover Events
+ * EventsScreen - Campus Events Discovery
  * Nested NYC – Student-only project network
  * 
- * Features upcoming campus events, hackathons, meetups, and workshops
+ * Specs:
+ * - Header: "Events" title with filter icon
+ * - Tab bar: Upcoming | Past
+ * - Event cards with image, title, date, location, attendees (clickable)
+ * - Bottom navigation
  */
 
 function EventsScreen() {
   const navigate = useNavigate()
-  const [selectedFilter, setSelectedFilter] = useState('all')
-  
-  const filters = [
-    { id: 'all', label: 'All' },
-    { id: 'hackathon', label: 'Hackathons' },
-    { id: 'workshop', label: 'Workshops' },
-    { id: 'meetup', label: 'Meetups' },
-    { id: 'social', label: 'Social' },
-  ]
-  
-  const events = [
-    {
-      id: 1,
-      title: 'NYC Hackathon 2025',
-      description: 'Annual inter-university hackathon. 48 hours of building.',
-      date: 'Jan 15-17',
-      time: '9:00 AM',
-      location: 'Columbia University',
-      category: 'hackathon',
-      attendees: 128,
-      image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=400&fit=crop'
-    },
-    {
-      id: 2,
-      title: 'Design Systems Workshop',
-      description: 'Learn to build scalable design systems with Figma.',
-      date: 'Jan 18',
-      time: '2:00 PM',
-      location: 'Parsons School of Design',
-      category: 'workshop',
-      attendees: 45,
-      image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600&h=400&fit=crop'
-    },
-    {
-      id: 3,
-      title: 'AI/ML Meetup',
-      description: 'Monthly AI/ML research discussion and networking.',
-      date: 'Jan 22',
-      time: '6:00 PM',
-      location: 'NYU Tandon',
-      category: 'meetup',
-      attendees: 89,
-      image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=400&fit=crop'
-    },
-    {
-      id: 4,
-      title: 'Startup Pitch Night',
-      description: 'Student founders pitch to NYC investors.',
-      date: 'Jan 25',
-      time: '7:00 PM',
-      location: 'NYU Stern',
-      category: 'social',
-      attendees: 156,
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop'
-    },
-    {
-      id: 5,
-      title: 'React Workshop',
-      description: 'Intro to React hooks and modern patterns.',
-      date: 'Jan 28',
-      time: '3:00 PM',
-      location: 'Columbia CS Building',
-      category: 'workshop',
-      attendees: 32,
-      image: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600&h=400&fit=crop'
-    },
-  ]
-  
-  const filteredEvents = selectedFilter === 'all' 
-    ? events 
-    : events.filter(e => e.category === selectedFilter)
+  const [activeTab, setActiveTab] = useState('upcoming')
+  const [upcomingEvents, setUpcomingEvents] = useState([])
+  const [pastEvents, setPastEvents] = useState([])
+
+  // Load events from centralized store
+  useEffect(() => {
+    setUpcomingEvents(getUpcomingEvents())
+    setPastEvents(getPastEvents())
+  }, [])
+
+  const events = activeTab === 'upcoming' ? upcomingEvents : pastEvents
 
   return (
     <div className="flex flex-col h-full bg-white relative">
@@ -90,7 +35,10 @@ function EventsScreen() {
         style={{ 
           paddingTop: '50px',
           paddingLeft: '20px',
-          paddingRight: '20px'
+          paddingRight: '20px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center'
         }}
       >
         <h1 
@@ -103,161 +51,260 @@ function EventsScreen() {
         >
           Events
         </h1>
-        <p 
-          style={{ 
-            margin: 0,
-            marginTop: '4px',
-            fontSize: '14px',
-            color: '#ADAFBB'
+        
+        {/* Filter Icon */}
+        <button 
+          style={{
+            width: '44px',
+            height: '44px',
+            borderRadius: '12px',
+            border: '1px solid #E5E7EB',
+            backgroundColor: 'transparent',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer'
           }}
         >
-          Discover what's happening across NYC campuses
-        </p>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5B4AE6" strokeWidth="2">
+            <line x1="4" y1="6" x2="20" y2="6"/>
+            <line x1="8" y1="12" x2="20" y2="12"/>
+            <line x1="4" y1="18" x2="20" y2="18"/>
+            <circle cx="6" cy="6" r="2" fill="#5B4AE6"/>
+            <circle cx="10" cy="12" r="2" fill="#5B4AE6"/>
+            <circle cx="6" cy="18" r="2" fill="#5B4AE6"/>
+          </svg>
+        </button>
       </div>
-      
-      {/* Filters */}
+
+      {/* Tab Bar */}
       <div 
         style={{ 
           display: 'flex',
-          gap: '8px',
-          paddingLeft: '20px',
-          paddingRight: '20px',
-          marginTop: '20px',
-          overflowX: 'auto',
-          paddingBottom: '4px'
+          marginTop: '16px',
+          borderBottom: '1px solid #E5E7EB'
         }}
       >
-        {filters.map(filter => (
-          <button
-            key={filter.id}
-            onClick={() => setSelectedFilter(filter.id)}
-            style={{
-              padding: '8px 16px',
-              borderRadius: '20px',
-              border: 'none',
-              backgroundColor: selectedFilter === filter.id ? '#5B4AE6' : '#F5F5F5',
-              color: selectedFilter === filter.id ? 'white' : '#666',
-              fontSize: '13px',
-              fontWeight: 600,
-              cursor: 'pointer',
-              whiteSpace: 'nowrap',
-              transition: 'all 0.2s ease'
-            }}
-          >
-            {filter.label}
-          </button>
-        ))}
+        <button
+          onClick={() => setActiveTab('upcoming')}
+          style={{
+            flex: 1,
+            padding: '14px 0',
+            backgroundColor: 'transparent',
+            border: 'none',
+            borderBottom: activeTab === 'upcoming' ? '2px solid #5B4AE6' : '2px solid transparent',
+            cursor: 'pointer',
+            fontSize: '14px',
+            fontWeight: 600,
+            color: activeTab === 'upcoming' ? '#5B4AE6' : '#ADAFBB',
+            transition: 'all 0.2s ease'
+          }}
+        >
+          Upcoming
+        </button>
+        <button
+          onClick={() => setActiveTab('past')}
+          style={{
+            flex: 1,
+            padding: '14px 0',
+            backgroundColor: 'transparent',
+            border: 'none',
+            borderBottom: activeTab === 'past' ? '2px solid #5B4AE6' : '2px solid transparent',
+            cursor: 'pointer',
+            fontSize: '14px',
+            fontWeight: 600,
+            color: activeTab === 'past' ? '#5B4AE6' : '#ADAFBB',
+            transition: 'all 0.2s ease'
+          }}
+        >
+          Past
+        </button>
       </div>
-      
+
       {/* Events List */}
       <div 
         style={{ 
           flex: 1, 
           overflowY: 'auto', 
           paddingBottom: '100px',
-          marginTop: '16px'
+          padding: '16px'
         }}
       >
-        {filteredEvents.map(event => (
-          <div 
-            key={event.id}
-            style={{
-              padding: '16px 20px',
-              borderBottom: '1px solid #F0F0F0',
-              cursor: 'pointer'
-            }}
-          >
-            {/* Event Image */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          {events.map(event => (
             <div 
+              key={event.id}
+              onClick={() => navigate(`/events/${event.id}`)}
               style={{
-                width: '100%',
-                height: '160px',
-                borderRadius: '12px',
+                backgroundColor: '#FAFAFA',
+                borderRadius: '16px',
                 overflow: 'hidden',
-                marginBottom: '12px'
+                cursor: 'pointer',
+                transition: 'transform 0.15s ease, box-shadow 0.15s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)'
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = 'none'
               }}
             >
-              <img 
-                src={event.image}
-                alt={event.title}
+              {/* Event Image - Clickable */}
+              <div 
                 style={{
                   width: '100%',
-                  height: '100%',
-                  objectFit: 'cover'
+                  height: '140px',
+                  position: 'relative'
                 }}
-              />
-            </div>
-            
-            {/* Event Info */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-              <div style={{ flex: 1 }}>
+              >
+                <img 
+                  src={event.image}
+                  alt={event.title}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
+                  }}
+                />
+                {/* Tags */}
+                <div 
+                  style={{
+                    position: 'absolute',
+                    top: '12px',
+                    left: '12px',
+                    display: 'flex',
+                    gap: '6px'
+                  }}
+                >
+                  {event.tags.map((tag, idx) => (
+                    <span 
+                      key={idx}
+                      style={{
+                        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                        backdropFilter: 'blur(4px)',
+                        color: 'white',
+                        fontSize: '11px',
+                        fontWeight: 600,
+                        padding: '4px 10px',
+                        borderRadius: '20px'
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Event Info */}
+              <div style={{ padding: '16px' }}>
                 <h3 
-                  style={{ 
-                    margin: 0, 
-                    fontSize: '16px', 
-                    fontWeight: 700, 
-                    color: '#231429' 
+                  style={{
+                    margin: 0,
+                    fontSize: '16px',
+                    fontWeight: 700,
+                    color: '#231429'
                   }}
                 >
                   {event.title}
                 </h3>
+                
                 <p 
-                  style={{ 
-                    margin: '4px 0 0', 
-                    fontSize: '13px', 
-                    color: '#666',
-                    lineHeight: 1.4
+                  style={{
+                    margin: 0,
+                    marginTop: '6px',
+                    fontSize: '13px',
+                    color: '#6B7280',
+                    lineHeight: 1.4,
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden'
                   }}
                 >
                   {event.description}
                 </p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '10px' }}>
-                  <span 
-                    style={{ 
-                      fontSize: '12px', 
-                      color: '#5B4AE6',
-                      fontWeight: 600
-                    }}
-                  >
-                    {event.date} • {event.time}
-                  </span>
-                  <span style={{ fontSize: '12px', color: '#ADAFBB' }}>
-                    {event.location}
-                  </span>
-                </div>
+
                 <div 
-                  style={{ 
-                    marginTop: '8px',
-                    fontSize: '11px',
-                    color: '#ADAFBB'
+                  style={{
+                    marginTop: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '16px',
+                    flexWrap: 'wrap'
                   }}
                 >
-                  {event.attendees} attending
+                  {/* Date */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5B4AE6" strokeWidth="2">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                      <line x1="16" y1="2" x2="16" y2="6"/>
+                      <line x1="8" y1="2" x2="8" y2="6"/>
+                      <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    <span style={{ fontSize: '12px', color: '#5B4AE6', fontWeight: 500 }}>
+                      {event.date}
+                    </span>
+                  </div>
+
+                  {/* Location */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                      <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    <span style={{ fontSize: '12px', color: '#6B7280' }}>
+                      {event.location}
+                    </span>
+                  </div>
+
+                  {/* Attendees */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                      <circle cx="9" cy="7" r="4"/>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    <span style={{ fontSize: '12px', color: '#6B7280' }}>
+                      {event.attendees} going
+                    </span>
+                  </div>
                 </div>
+
+                {/* RSVP Button */}
+                {activeTab === 'upcoming' && (
+                  <button 
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      navigate(`/events/${event.id}`)
+                    }}
+                    style={{
+                      marginTop: '16px',
+                      width: '100%',
+                      height: '44px',
+                      backgroundColor: '#5B4AE6',
+                      color: 'white',
+                      fontSize: '14px',
+                      fontWeight: 600,
+                      borderRadius: '12px',
+                      border: 'none',
+                      cursor: 'pointer',
+                      transition: 'background-color 0.15s ease'
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#4A3CD4'}
+                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#5B4AE6'}
+                  >
+                    RSVP
+                  </button>
+                )}
               </div>
-              
-              {/* RSVP Button */}
-              <button 
-                style={{
-                  padding: '8px 16px',
-                  backgroundColor: '#5B4AE6',
-                  color: 'white',
-                  fontSize: '12px',
-                  fontWeight: 600,
-                  borderRadius: '8px',
-                  border: 'none',
-                  cursor: 'pointer',
-                  marginLeft: '12px',
-                  flexShrink: 0
-                }}
-              >
-                RSVP
-              </button>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-      
+
       {/* Bottom Navigation */}
       <BottomNav />
     </div>
@@ -265,8 +312,4 @@ function EventsScreen() {
 }
 
 export default EventsScreen
-
-
-
-
 

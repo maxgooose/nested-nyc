@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
  * 
  * Layout:
  * - White background
- * - Centered geometric logo (polygonal shape)
+ * - Centered geometric logo (polygonal heart shape)
  * - Brand name "NESTED" below logo
  * - Home indicator at bottom
  * 
@@ -25,7 +25,7 @@ function SplashScreen() {
         <NestedLogo />
         <h1 
           className="mt-4 text-[18px] font-bold tracking-[0.15em] uppercase"
-          style={{ color: '#5B4AE6' }}
+          style={{ color: '#E94057' }}
         >
           NESTED
         </h1>
@@ -47,8 +47,8 @@ function SplashScreen() {
 }
 
 /**
- * NestedLogo - Geometric polygonal design
- * Clean geometric design with purple accent shades
+ * NestedLogo - Geometric polygonal heart
+ * Clean geometric design with pink/red/coral/magenta shades
  */
 function NestedLogo() {
   return (
@@ -59,78 +59,78 @@ function NestedLogo() {
       fill="none" 
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Geometric shape made of polygons - purple monochrome */}
+      {/* Heart shape made of geometric polygons */}
       
       {/* Top left lobe - outer */}
       <path 
         d="M50 20L25 8L8 25L15 45L50 75L50 20Z" 
-        fill="#5B4AE6"
+        fill="#E94057"
       />
       
       {/* Top right lobe - outer */}
       <path 
         d="M50 20L75 8L92 25L85 45L50 75L50 20Z" 
-        fill="#7A6BD6"
+        fill="#F27281"
       />
       
       {/* Left side accent */}
       <path 
         d="M8 25L15 45L25 35L20 20L8 25Z" 
-        fill="#4A3CD4"
+        fill="#8A2387"
       />
       
       {/* Right side accent */}
       <path 
         d="M92 25L85 45L75 35L80 20L92 25Z" 
-        fill="#8B7DE8"
+        fill="#EE6B7D"
       />
       
       {/* Inner left piece */}
       <path 
         d="M25 8L20 20L35 30L50 20L25 8Z" 
-        fill="#6959D5"
+        fill="#C73E5E"
       />
       
       {/* Inner right piece */}
       <path 
         d="M75 8L80 20L65 30L50 20L75 8Z" 
-        fill="#9E92E9"
+        fill="#F8A4B0"
       />
       
       {/* Center top */}
       <path 
         d="M35 30L50 20L65 30L50 45L35 30Z" 
-        fill="#9690E9"
+        fill="#F4929F"
       />
       
       {/* Bottom left */}
       <path 
         d="M15 45L35 50L50 75L15 45Z" 
-        fill="#4A3CD4"
+        fill="#B83B5E"
       />
       
       {/* Bottom right */}
       <path 
         d="M85 45L65 50L50 75L85 45Z" 
-        fill="#7A6BD6"
+        fill="#F67280"
       />
       
       {/* Center bottom */}
       <path 
         d="M35 50L50 45L65 50L50 75L35 50Z" 
-        fill="#EEEAFE"
+        fill="#FCCDD3"
       />
       
       {/* Left inner accent */}
       <path 
         d="M25 35L35 30L35 50L25 35Z" 
-        fill="#5B4AE6"
+        fill="#D64565"
       />
       
       {/* Right inner accent */}
       <path 
         d="M75 35L65 30L65 50L75 35Z" 
-        fill="#B2A9EA"
+        fill="#F9B5BD"
       />
     </svg>
   )

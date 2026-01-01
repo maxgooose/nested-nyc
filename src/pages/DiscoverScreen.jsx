@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import BottomNav from '../components/BottomNav'
+import { getDiscoverProjects } from '../utils/projectData'
 
 /**
  * DiscoverScreen - Projects Feed + Nests Discovery
@@ -9,7 +10,7 @@ import BottomNav from '../components/BottomNav'
  * Specs:
  * - Header: "Discover" title, NYC location, filter icon
  * - Tab bar: Projects | Nests
- * - Projects tab: Social media feed of project cards
+ * - Projects tab: Social media feed of project cards (includes user-created)
  * - Nests tab: Discover and join communities
  * - Bottom nav: 4 icons
  */
@@ -17,11 +18,17 @@ import BottomNav from '../components/BottomNav'
 function DiscoverScreen() {
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState('projects')
+  const [projectsFeed, setProjectsFeed] = useState([])
+
+  // Load projects from centralized store
+  useEffect(() => {
+    setProjectsFeed(getDiscoverProjects())
+  }, [])
   
-  // Projects feed data with rich team info
-  const projectsFeed = [
+  // Legacy data (not used - projectsFeed comes from getDiscoverProjects)
+  const _legacyProjects = [
     {
-      id: 1,
+      id: 'proj-1-legacy',
       title: 'ClimateTech Dashboard',
       category: 'Sustainability × Data Viz',
       schools: ['NYU', 'Columbia'],
@@ -271,7 +278,8 @@ function DiscoverScreen() {
                     width: '36px',
                     height: '36px',
                     borderRadius: '50%',
-                    overflow: 'hidden'
+                    overflow: 'hidden',
+                    border: project.isUserProject ? '2px solid #5B4AE6' : 'none'
                   }}
                 >
                   <img 
@@ -281,38 +289,66 @@ function DiscoverScreen() {
                   />
                 </div>
                 <div style={{ flex: 1 }}>
-                  <p style={{ margin: 0, fontSize: '14px', fontWeight: 600, color: '#231429' }}>
-                    {project.author}
-                  </p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <p style={{ margin: 0, fontSize: '14px', fontWeight: 600, color: '#231429' }}>
+                      {project.author}
+                    </p>
+                    {project.isUserProject && (
+                      <span 
+                        style={{
+                          padding: '2px 8px',
+                          backgroundColor: '#10B981',
+                          color: 'white',
+                          fontSize: '10px',
+                          fontWeight: 700,
+                          borderRadius: '10px',
+                          textTransform: 'uppercase'
+                        }}
+                      >
+                        Your Project
+                      </span>
+                    )}
+                  </div>
                   <p style={{ margin: 0, fontSize: '12px', color: '#ADAFBB' }}>
                     {project.schools.join(' • ')}
                   </p>
                 </div>
-                <button 
-                  style={{
-                    padding: '6px 16px',
-                    backgroundColor: '#5B4AE6',
-                    color: 'white',
-                    fontSize: '12px',
-                    fontWeight: 600,
-                    borderRadius: '20px',
-                    border: 'none',
-                    cursor: 'pointer'
-                  }}
-                >
-                  Join
-                </button>
+                {!project.isUserProject && (
+                  <button 
+                    style={{
+                      padding: '6px 16px',
+                      backgroundColor: '#5B4AE6',
+                      color: 'white',
+                      fontSize: '12px',
+                      fontWeight: 600,
+                      borderRadius: '20px',
+                      border: 'none',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Join
+                  </button>
+                )}
               </div>
               
               {/* Project Image */}
               <div 
-                className="project-card-image"
-                onClick={() => navigate('/profile-detail', { state: { project } })}
-                style={{ cursor: 'pointer' }}
+                onClick={() => navigate(`/projects/${project.id}`)}
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  aspectRatio: '4/3',
+                  cursor: 'pointer'
+                }}
               >
                 <img 
                   src={project.image}
                   alt={project.title}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
+                  }}
                 />
                 {/* Category Badge */}
                 <div 

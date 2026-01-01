@@ -1,111 +1,95 @@
-import { useLocation } from 'react-router-dom'
-import DesktopNav from './DesktopNav'
-import DesktopSidebar from './DesktopSidebar'
+import { useLocation, useNavigate } from 'react-router-dom'
+import ContextSidebar from './ContextSidebar'
 
 /**
- * WebLayout - Unified responsive layout for all pages
- * 
- * Provides consistent desktop-first layout matching /discover:
- * - Top navigation bar
- * - Centered content container (max-width: 1200px)
- * - Optional sidebar for main app pages
+ * WebLayout - Desktop layout wrapper with header navigation and contextual sidebar
  * 
  * Layout Types:
- * 1. 'app' - Main app pages with optional sidebar (discover, matches, etc.)
- * 2. 'auth' - Auth/onboarding pages with centered card layout
- * 3. 'chat' - Three-column chat layout
- * 4. 'form' - Profile setup forms (centered, narrower width)
- * 
- * Breakpoints:
- * - Desktop (≥1024px): Full web layout
- * - Tablet (768-1023px): Stacked but wide
- * - Mobile (<768px): Single column, mobile-optimized
+ * - 'app': Main app pages (Discover, Events, My Projects, Messages)
+ * - 'auth': Auth/onboarding pages (no sidebar)
+ * - 'form': Profile setup forms (no sidebar)
+ * - 'chat': Chat pages (no sidebar)
  */
-
-// Routes that show sidebar
-const SIDEBAR_ROUTES = ['/discover', '/events', '/matches', '/messages']
-
-// Route layout type mapping
-const ROUTE_LAYOUTS = {
-  // Main app pages
-  '/discover': 'app',
-  '/events': 'app',
-  '/matches': 'app',
-  '/messages': 'app',
-  '/my-profile': 'app',
-  '/filters': 'app',
-  '/profile-detail': 'app',
-  
-  // Auth pages
-  '/signup': 'auth',
-  '/uni-email': 'auth',
-  '/verify': 'auth',
-  '/onboarding/1': 'auth',
-  '/onboarding/2': 'auth',
-  '/onboarding/3': 'auth',
-  
-  // Profile setup forms
-  '/profile': 'form',
-  '/major': 'form',
-  '/gender': 'form',
-  '/interests': 'form',
-  '/search-friends': 'form',
-  '/notifications': 'form',
-}
-
-function WebLayout({ children, layoutType: propLayoutType }) {
+function WebLayout({ children, layoutType = 'app' }) {
   const location = useLocation()
+  const navigate = useNavigate()
+  const pathname = location.pathname
+
+  // Determine if sidebar should be shown based on route
+  const shouldShowSidebar = layoutType === 'app' && !['/messages'].includes(pathname)
+  const isOnboardingRoute = pathname.startsWith('/onboarding') || pathname === '/uni-email'
   
-  // Determine layout type from route or prop
-  const layoutType = propLayoutType || ROUTE_LAYOUTS[location.pathname] || 'app'
-  const showSidebar = SIDEBAR_ROUTES.includes(location.pathname) && layoutType === 'app'
-  const isChat = location.pathname.startsWith('/chat/')
-  
-  // Get layout-specific classes
-  const getContentClass = () => {
-    if (isChat) return 'web-content-chat'
-    if (layoutType === 'auth') return 'web-content-auth'
-    if (layoutType === 'form') return 'web-content-form'
-    return showSidebar ? 'web-content-with-sidebar' : 'web-content-full'
-  }
+  // Never show sidebar on onboarding routes
+  const showSidebar = shouldShowSidebar && !isOnboardingRoute
+
+  // Navigation items
+  const navItems = [
+    { path: '/discover', label: 'Discover', icon: 'discover' },
+    { path: '/events', label: 'Events', icon: 'events' },
+    { path: '/matches', label: 'My Projects', icon: 'projects' },
+    { path: '/messages', label: 'Messages', icon: 'messages' },
+  ]
 
   return (
     <div className="web-layout">
-      {/* Top Navigation */}
-      <DesktopNav />
-      
-      {/* Main Content Area */}
-      <div className="web-container">
-        <div className={`web-content ${getContentClass()}`}>
-          {/* Main Content */}
-          <main className="web-main">
-            {layoutType === 'auth' ? (
-              <div className="web-auth-wrapper">
-                <div className="web-auth-marketing">
-                  <AuthMarketingContent pathname={location.pathname} />
-                </div>
-                <div className="web-auth-card">
-                  {children}
-                </div>
-              </div>
-            ) : layoutType === 'form' ? (
-              <div className="web-form-wrapper">
-                <FormProgressIndicator pathname={location.pathname} />
-                <div className="web-form-card">
-                  {children}
-                </div>
-              </div>
-            ) : (
-              <div className="web-app-content">
-                {children}
-              </div>
+      {/* Top Navigation Header */}
+      <header className="web-header">
+        <div className="web-header-content">
+          {/* Logo */}
+          <div 
+            className="web-logo"
+            onClick={() => navigate('/discover')}
+          >
+            <NestedLogoSmall />
+            <span className="web-logo-text">NESTED</span>
+          </div>
+
+          {/* Navigation - only show for app layout */}
+          {layoutType === 'app' && (
+            <nav className="web-nav">
+              {navItems.map(item => (
+                <button
+                  key={item.path}
+                  className={`web-nav-item ${pathname === item.path ? 'active' : ''}`}
+                  onClick={() => navigate(item.path)}
+                >
+                  <NavIcon type={item.icon} active={pathname === item.path} />
+                  <span>{item.label}</span>
+                </button>
+              ))}
+            </nav>
+          )}
+
+          {/* Right side - Profile */}
+          <div className="web-header-right">
+            {layoutType === 'app' && (
+              <button 
+                className="web-profile-btn"
+                onClick={() => navigate('/my-profile')}
+              >
+                <img 
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
+                  alt="Profile"
+                  className="web-profile-img"
+                />
+              </button>
             )}
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content Area */}
+      <div className="web-main">
+        <div className={`web-content-wrapper ${showSidebar ? 'with-sidebar' : 'centered'}`}>
+          {/* Main Content */}
+          <main className={`web-content ${layoutType === 'auth' || layoutType === 'form' ? 'web-content-centered' : ''}`}>
+            {children}
           </main>
-          
-          {/* Sidebar - only for main app pages */}
+
+          {/* Contextual Sidebar */}
           {showSidebar && (
             <aside className="web-sidebar">
-              <DesktopSidebar />
+              <ContextSidebar />
             </aside>
           )}
         </div>
@@ -115,127 +99,65 @@ function WebLayout({ children, layoutType: propLayoutType }) {
 }
 
 /**
- * AuthMarketingContent - Left column content for auth pages
+ * NestedLogoSmall - Compact logo for header
  */
-function AuthMarketingContent({ pathname }) {
-  const content = {
-    '/signup': {
-      headline: 'Join the NYC student network',
-      description: 'Connect with verified students from NYU, Columbia, Parsons, and more.',
-      features: ['Verified .edu emails only', 'Cross-campus collaboration', 'Real projects, real teammates']
-    },
-    '/uni-email': {
-      headline: 'Verify your university',
-      description: 'We use your .edu email to confirm you\'re a real student.',
-      features: ['Quick email verification', 'No spam, ever', 'Join 1000+ NYC students']
-    },
-    '/verify': {
-      headline: 'Check your inbox',
-      description: 'Enter the verification code we sent to your email.',
-      features: ['Secure verification', 'One-time code', 'Instant access']
-    },
-    '/onboarding/1': {
-      headline: 'Verified Students',
-      description: 'Every member is verified with a .edu email.',
-      features: ['Real students only', 'Trusted community', 'NYC universities']
-    },
-    '/onboarding/2': {
-      headline: 'Find Your Team',
-      description: 'Match with students who complement your skills.',
-      features: ['Skill-based matching', 'Project collaboration', 'Build together']
-    },
-    '/onboarding/3': {
-      headline: 'Build Amazing Projects',
-      description: 'From hackathons to startups, create something real.',
-      features: ['Real-world projects', 'Portfolio building', 'Launch together']
-    }
-  }
-  
-  const data = content[pathname] || content['/signup']
-
+function NestedLogoSmall() {
   return (
-    <div className="auth-marketing-inner">
-      <div className="auth-marketing-logo">
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-          <circle cx="24" cy="24" r="22" stroke="#5B4AE6" strokeWidth="2" fill="none" />
-          <circle cx="24" cy="24" r="14" stroke="#5B4AE6" strokeWidth="2" fill="none" />
-          <circle cx="24" cy="24" r="6" fill="#5B4AE6" />
-        </svg>
-      </div>
-      <h1 className="auth-marketing-headline">{data.headline}</h1>
-      <p className="auth-marketing-description">{data.description}</p>
-      <ul className="auth-marketing-features">
-        {data.features.map((feature, idx) => (
-          <li key={idx}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="10" fill="#EEEAFE" />
-              <path d="M8 12L11 15L16 9" stroke="#5B4AE6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <span>{feature}</span>
-          </li>
-        ))}
-      </ul>
-      <div className="auth-marketing-trust">
-        <div className="auth-trust-avatars">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop" alt="" />
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop" alt="" />
-          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=40&h=40&fit=crop" alt="" />
-        </div>
-        <span>Join 1,200+ NYC students</span>
-      </div>
-    </div>
+    <svg width="32" height="28" viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 20L25 8L8 25L15 45L50 75L50 20Z" fill="#E94057"/>
+      <path d="M50 20L75 8L92 25L85 45L50 75L50 20Z" fill="#F27281"/>
+      <path d="M8 25L15 45L25 35L20 20L8 25Z" fill="#8A2387"/>
+      <path d="M92 25L85 45L75 35L80 20L92 25Z" fill="#EE6B7D"/>
+      <path d="M25 8L20 20L35 30L50 20L25 8Z" fill="#C73E5E"/>
+      <path d="M75 8L80 20L65 30L50 20L75 8Z" fill="#F8A4B0"/>
+      <path d="M35 30L50 20L65 30L50 45L35 30Z" fill="#F4929F"/>
+      <path d="M15 45L35 50L50 75L15 45Z" fill="#B83B5E"/>
+      <path d="M85 45L65 50L50 75L85 45Z" fill="#F67280"/>
+      <path d="M35 50L50 45L65 50L50 75L35 50Z" fill="#FCCDD3"/>
+    </svg>
   )
 }
 
 /**
- * FormProgressIndicator - Horizontal stepper for profile setup
+ * NavIcon - Navigation icons
  */
-function FormProgressIndicator({ pathname }) {
-  const steps = [
-    { path: '/profile', label: 'Profile' },
-    { path: '/major', label: 'Major' },
-    { path: '/gender', label: 'About' },
-    { path: '/interests', label: 'Interests' },
-    { path: '/search-friends', label: 'Friends' },
-    { path: '/notifications', label: 'Notifications' }
-  ]
+function NavIcon({ type, active }) {
+  const color = active ? '#5B4AE6' : '#6B7280'
   
-  const currentIndex = steps.findIndex(s => s.path === pathname)
-
-  return (
-    <div className="form-progress">
-      <div className="form-progress-steps">
-        {steps.map((step, idx) => (
-          <div 
-            key={step.path}
-            className={`form-progress-step ${idx <= currentIndex ? 'active' : ''} ${idx === currentIndex ? 'current' : ''}`}
-          >
-            <div className="form-progress-dot">
-              {idx < currentIndex ? (
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-                  <path d="M5 12L10 17L19 8" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              ) : (
-                <span>{idx + 1}</span>
-              )}
-            </div>
-            <span className="form-progress-label">{step.label}</span>
-          </div>
-        ))}
-      </div>
-      <div className="form-progress-bar">
-        <div 
-          className="form-progress-fill" 
-          style={{ width: `${((currentIndex + 1) / steps.length) * 100}%` }}
-        />
-      </div>
-    </div>
-  )
+  switch (type) {
+    case 'discover':
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2">
+          <circle cx="12" cy="12" r="10"/>
+          <polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88"/>
+        </svg>
+      )
+    case 'events':
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+      )
+    case 'projects':
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2">
+          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+        </svg>
+      )
+    case 'messages':
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+      )
+    default:
+      return null
+  }
 }
 
 export default WebLayout
-
-
-
 
 

@@ -235,6 +235,7 @@ export const authService = {
    */
   async sendMagicLink(email) {
     // CRITICAL: Validate .edu email FIRST before any Supabase call
+    // This ensures Supabase auth is NEVER triggered for invalid emails
     if (!email || typeof email !== 'string' || email.trim() === '') {
       return {
         data: null,
@@ -257,11 +258,12 @@ export const authService = {
       }
     }
 
-    // Validate .edu domain - STRICT validation
+    // Validate .edu domain - STRICT validation before Supabase
     const domain = email.split('@')[1]?.toLowerCase()
     const isEduDomain = domain && domain.endsWith('.edu')
     
     if (!isEduDomain) {
+      // Return error immediately - DO NOT call Supabase
       return {
         data: null,
         error: {
@@ -271,30 +273,28 @@ export const authService = {
       }
     }
 
-    // MOCK MODE: If Supabase is not configured, use mock authentication
-    // This allows the app to work without Supabase setup
+    // Check if Supabase is configured (only after validation passes)
     if (!isSupabaseConfigured()) {
-      console.log('📧 Mock auth: Simulating magic link sent to', email)
-      // Store email in localStorage for mock auth
-      localStorage.setItem('mock_auth_email', email)
-      localStorage.setItem('mock_auth_pending', 'true')
+      const configError = getConfigurationError()
       return {
-        data: { user: null, session: null },
-        error: null,
-        mock: true
+        data: null,
+        error: {
+          message: configError,
+          code: 'SUPABASE_NOT_CONFIGURED',
+          developerMessage: configError
+        }
       }
     }
 
-    // Real Supabase auth
+    // Ensure supabase client exists before making API calls
     if (!supabase) {
-      // Fallback to mock if supabase client doesn't exist
-      console.log('📧 Mock auth fallback: Simulating magic link sent to', email)
-      localStorage.setItem('mock_auth_email', email)
-      localStorage.setItem('mock_auth_pending', 'true')
       return {
-        data: { user: null, session: null },
-        error: null,
-        mock: true
+        data: null,
+        error: {
+          message: 'Authentication service is not available. Please configure Supabase environment variables.',
+          code: 'SUPABASE_NOT_CONFIGURED',
+          developerMessage: getConfigurationError()
+        }
       }
     }
 
@@ -310,15 +310,15 @@ export const authService = {
       })
 
       if (error) {
-        // Handle network errors - fallback to mock
+        // Handle network errors
         if (error.message?.includes('fetch') || error.message?.includes('network') || error.message?.includes('Failed')) {
-          console.log('📧 Network error, using mock auth for', email)
-          localStorage.setItem('mock_auth_email', email)
-          localStorage.setItem('mock_auth_pending', 'true')
           return {
-            data: { user: null, session: null },
-            error: null,
-            mock: true
+            data: null,
+            error: {
+              message: 'Unable to connect to authentication service. Please check your internet connection and ensure Supabase is properly configured.',
+              code: 'NETWORK_ERROR',
+              originalError: error
+            }
           }
         }
 
@@ -336,14 +336,28 @@ export const authService = {
 
       return { data, error: null }
     } catch (err) {
-      // Network error - fallback to mock auth
-      console.log('📧 Error occurred, using mock auth for', email)
-      localStorage.setItem('mock_auth_email', email)
-      localStorage.setItem('mock_auth_pending', 'true')
+      // Handle network/fetch errors
+      if (err instanceof TypeError && err.message.includes('fetch')) {
+        return {
+          data: null,
+          error: {
+            message: 'Unable to connect to authentication service. Please check your internet connection and ensure Supabase credentials are correct.',
+            code: 'NETWORK_ERROR',
+            originalError: err
+          }
+        }
+      }
+
+      // Log error for debugging
+      console.error('Error sending magic link:', err)
+      
       return {
-        data: { user: null, session: null },
-        error: null,
-        mock: true
+        data: null,
+        error: {
+          message: err.message || 'An error occurred. Please try again.',
+          code: 'MAGIC_LINK_ERROR',
+          originalError: err
+        }
       }
     }
   },
@@ -355,35 +369,13 @@ export const authService = {
    * @returns {Promise<{data: any, error: any}>}
    */
   async verifyOtp(email, token) {
-    // MOCK MODE: Accept any 4-digit code when Supabase is not configured
     if (!isSupabaseConfigured() || !supabase) {
-      const mockEmail = localStorage.getItem('mock_auth_email')
-      const isPending = localStorage.getItem('mock_auth_pending')
-      
-      // Accept any 4-digit code for mock auth
-      if (isPending && token && token.length === 4) {
-        console.log('✅ Mock auth: Verified with code', token)
-        localStorage.setItem('mock_auth_user', JSON.stringify({
-          email: mockEmail || email,
-          id: 'mock-user-' + Date.now(),
-          created_at: new Date().toISOString()
-        }))
-        localStorage.removeItem('mock_auth_pending')
-        return {
-          data: {
-            user: { email: mockEmail || email, id: 'mock-user-' + Date.now() },
-            session: { access_token: 'mock-token' }
-          },
-          error: null,
-          mock: true
-        }
-      }
-      
       return {
         data: null,
         error: {
-          message: 'Please enter a 4-digit code',
-          code: 'INVALID_CODE'
+          message: 'Authentication service is not configured.',
+          code: 'SUPABASE_NOT_CONFIGURED',
+          developerMessage: getConfigurationError()
         }
       }
     }

@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { authService, getErrorMessage } from '../lib/supabase'
+import { authService, getErrorMessage, isSupabaseConfigured } from '../lib/supabase'
 import { getEmailValidationError, isEduEmail } from '../utils/emailValidation'
 
 /**
@@ -9,13 +9,13 @@ import { getEmailValidationError, isEduEmail } from '../utils/emailValidation'
  * Precise measurements (matching PhoneScreen):
  * - Screen padding: 40px horizontal
  * - Top padding: 130px
- * - Title: "My university email", 34px bold, #5B4AE6, left-aligned
+ * - Title: "My university email", 34px bold, #E5385A, left-aligned
  * - Title-desc gap: 10px
- * - Description: 14px, #5B4AE6, line-height 1.5
+ * - Description: 14px, #E5385A, line-height 1.5
  * - Input margin-top: 40px
- * - Input height: 58px, border-radius 15px, border #E5E7EB
+ * - Input height: 58px, border-radius 15px, border #E8E6EA
  * - Button margin-top: 48px
- * - Button: 56px height, 15px radius, #5B4AE6 bg
+ * - Button: 56px height, 15px radius, #E5385A bg
  * - Home indicator: 134x5px black, 8px from bottom
  */
 
@@ -49,20 +49,28 @@ function UniEmailScreen() {
     // Clear previous errors
     setError('')
     
-    // Validate email FIRST
+    // CRITICAL: Validate email FIRST before any Supabase configuration check
+    // This ensures Supabase is NEVER called for invalid emails
     const validationError = getEmailValidationError(email)
     if (validationError) {
       setError(validationError)
+      return // Stop here - do not proceed to Supabase
+    }
+
+    // Only check Supabase configuration after email validation passes
+    if (!isSupabaseConfigured()) {
+      setError('Authentication service is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env file.')
       return
     }
 
     setIsLoading(true)
 
     try {
-      // Send magic link (uses mock auth if Supabase not configured)
+      // Send magic link via Supabase (passwordless auth)
       const { data, error: authError } = await authService.sendMagicLink(email)
 
       if (authError) {
+        // Log error details for debugging
         console.error('Auth error:', authError)
         setError(getErrorMessage(authError))
         setIsLoading(false)
@@ -72,6 +80,7 @@ function UniEmailScreen() {
       // Success - navigate to verify screen with email
       navigate('/verify', { state: { email } })
     } catch (err) {
+      // Log full error for debugging
       console.error('Unexpected error during signup:', err)
       setError(getErrorMessage({
         message: err.message || 'An unexpected error occurred. Please try again.',
@@ -90,12 +99,12 @@ function UniEmailScreen() {
   // Determine input border color based on validation state
   const getBorderColor = () => {
     if (error && hasBlurred) {
-      return '#5B4AE6' // Red border for error
+      return '#E5385A' // Red border for error
     }
     if (email && isEduEmail(email)) {
       return '#4CAF50' // Green border for valid .edu email
     }
-    return '#E5E7EB' // Default border
+    return '#E8E6EA' // Default border
   }
 
   return (
@@ -110,7 +119,7 @@ function UniEmailScreen() {
           style={{ 
             fontSize: '34px',
             fontWeight: 700,
-            color: '#5B4AE6',
+            color: '#E5385A',
             margin: 0,
             letterSpacing: 'normal',
             wordSpacing: 'normal'
@@ -126,7 +135,7 @@ function UniEmailScreen() {
             marginTop: '10px',
             fontSize: '14px',
             lineHeight: 1.5,
-            color: '#5B4AE6'
+            color: '#E5385A'
           }}
         >
           Enter your .edu email address to verify
@@ -163,7 +172,7 @@ function UniEmailScreen() {
             <svg width="20" height="16" viewBox="0 0 20 16" fill="none">
               <path 
                 d="M18 0H2C0.9 0 0 0.9 0 2V14C0 15.1 0.9 16 2 16H18C19.1 16 20 15.1 20 14V2C20 0.9 19.1 0 18 0ZM18 4L10 9L2 4V2L10 7L18 2V4Z" 
-                fill={error && hasBlurred ? '#5B4AE6' : '#5B4AE6'}
+                fill={error && hasBlurred ? '#E5385A' : '#E5385A'}
               />
             </svg>
           </div>
@@ -213,8 +222,8 @@ function UniEmailScreen() {
               fill="none" 
               style={{ flexShrink: 0, marginTop: '2px' }}
             >
-              <circle cx="12" cy="12" r="10" stroke="#5B4AE6" strokeWidth="2" fill="none"/>
-              <path d="M12 8v4M12 16h.01" stroke="#5B4AE6" strokeWidth="2" strokeLinecap="round"/>
+              <circle cx="12" cy="12" r="10" stroke="#E5385A" strokeWidth="2" fill="none"/>
+              <path d="M12 8v4M12 16h.01" stroke="#E5385A" strokeWidth="2" strokeLinecap="round"/>
             </svg>
             
             {/* Error Text */}
@@ -223,7 +232,7 @@ function UniEmailScreen() {
                 margin: 0,
                 fontSize: '13px',
                 lineHeight: 1.5,
-                color: '#5B4AE6',
+                color: '#E5385A',
                 flex: 1
               }}
             >
@@ -261,7 +270,7 @@ function UniEmailScreen() {
           marginTop: '48px',
           width: '100%',
           height: '56px',
-          backgroundColor: (isLoading || !email || !!error) ? '#E5E7EB' : '#5B4AE6',
+          backgroundColor: (isLoading || !email || !!error) ? '#E8E6EA' : '#E5385A',
           color: (isLoading || !email || !!error) ? '#ADAFBB' : 'white',
           fontSize: '16px',
           fontWeight: 700,

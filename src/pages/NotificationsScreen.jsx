@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom'
+import { completeOnboarding } from '../App'
 
 /**
  * NotificationsScreen - "Enable notifications" Permission Screen
- * EXACT Figma Copy
+ * Final step of onboarding flow - marks onboarding as complete
  * 
  * Specs from Figma:
  * - Skip button: top right, 16px bold, #5B4AE6
@@ -15,6 +16,13 @@ import { useNavigate } from 'react-router-dom'
 
 function NotificationsScreen() {
   const navigate = useNavigate()
+
+  const handleComplete = () => {
+    // Mark onboarding as complete in localStorage
+    completeOnboarding()
+    // Navigate to main app
+    navigate('/discover')
+  }
 
   return (
     <div 
@@ -30,7 +38,7 @@ function NotificationsScreen() {
         }}
       >
         <button 
-          onClick={() => navigate('/discover')}
+          onClick={handleComplete}
           style={{
             fontSize: '16px',
             fontWeight: 700,
@@ -91,7 +99,7 @@ function NotificationsScreen() {
       
       {/* Notify Button */}
       <button 
-        onClick={() => navigate('/discover')}
+        onClick={handleComplete}
         style={{
           width: '100%',
           height: '56px',

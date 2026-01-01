@@ -1,7 +1,8 @@
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 
 /**
- * BottomNav - Bottom Navigation Bar
+ * BottomNav - Bottom Navigation Bar (Mobile Only)
  * Nested NYC – Student-only project network
  * 
  * Specs:
@@ -11,11 +12,26 @@ import { useNavigate, useLocation } from 'react-router-dom'
  * - Inactive icon: #ADAFBB (outline)
  * - 4 tabs: Discover (projects), My Projects, Messages (nests), Profile
  * - Home indicator: 134x5px black, 8px from bottom
+ * - ONLY renders on mobile (< 1024px)
  */
 
 function BottomNav() {
   const navigate = useNavigate()
   const location = useLocation()
+  const [isMobile, setIsMobile] = useState(true)
+
+  // Check if we're on mobile
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  // Don't render on desktop
+  if (!isMobile) {
+    return null
+  }
   
   const tabs = [
     { id: 'discover', path: '/discover', icon: CardsIcon, label: 'Discover projects' },
