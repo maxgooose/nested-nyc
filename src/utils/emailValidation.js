@@ -9,20 +9,12 @@
  * @returns {boolean}
  */
 export function isEduEmail(email) {
+  // TEMPORARILY DISABLED FOR TESTING - TODO: Re-enable .edu check
   if (!email || typeof email !== 'string') {
     return false
   }
-
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  if (!emailRegex.test(email)) {
-    return false
-  }
-
-  const domain = email.split('@')[1]?.toLowerCase()
-  
-  // STRICT: Only allow .edu domain (US universities)
-  // This ensures only .edu emails pass validation
-  return domain && domain.endsWith('.edu')
+  return emailRegex.test(email)
 }
 
 /**

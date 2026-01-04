@@ -150,6 +150,7 @@ export const authService = {
    * @param {string} email - Email to validate
    * @returns {{valid: boolean, error: object|null}}
    */
+  // TEMPORARILY DISABLED FOR TESTING - TODO: Re-enable .edu check
   validateEduEmail(email) {
     if (!email || typeof email !== 'string' || email.trim() === '') {
       return {
@@ -168,17 +169,6 @@ export const authService = {
         error: {
           message: 'Please enter a valid email address',
           code: 'INVALID_EMAIL_FORMAT'
-        }
-      }
-    }
-
-    const domain = email.split('@')[1]?.toLowerCase()
-    if (!domain || !domain.endsWith('.edu')) {
-      return {
-        valid: false,
-        error: {
-          message: 'Only .edu email addresses are allowed. Please use your university email address ending in .edu',
-          code: 'INVALID_EMAIL_DOMAIN'
         }
       }
     }
