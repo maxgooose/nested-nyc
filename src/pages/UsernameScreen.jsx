@@ -57,10 +57,16 @@ function UsernameScreen() {
         return
       }
 
-      setIsChecking(true)
-      const available = await profileService.isUsernameAvailable(usernameToCheck)
-      setIsAvailable(available)
-      setIsChecking(false)
+      try {
+        setIsChecking(true)
+        const available = await profileService.isUsernameAvailable(usernameToCheck)
+        setIsAvailable(available)
+      } catch (err) {
+        console.error('Username check failed:', err)
+        setIsAvailable(null)
+      } finally {
+        setIsChecking(false)
+      }
     }, 400),
     []
   )
@@ -78,9 +84,11 @@ function UsernameScreen() {
     // If format is valid, check availability (debounced)
     if (!error && value.length >= 3) {
       setIsAvailable(null) // Reset while checking
+      setIsChecking(true)  // Show spinner immediately
       checkAvailability(value)
     } else {
       setIsAvailable(null)
+      setIsChecking(false)
     }
   }, [checkAvailability])
 
