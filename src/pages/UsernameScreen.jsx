@@ -115,8 +115,8 @@ function UsernameScreen() {
     setSubmitError('')
 
     try {
-      // Update the profile with the username
-      const { error: updateError } = await profileService.updateProfile(user.id, {
+      // Upsert the profile with the username (creates if doesn't exist)
+      const { error: updateError } = await profileService.upsertProfile(user.id, {
         username: username.trim()
       })
 

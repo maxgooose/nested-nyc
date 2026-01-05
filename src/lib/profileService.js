@@ -97,7 +97,6 @@ export const profileService = {
         .update(updates)
         .eq('id', userId)
         .select()
-        .single()
 
       if (error) {
         // Handle unique constraint violation (username taken)
@@ -110,7 +109,12 @@ export const profileService = {
         return { data: null, error: { message: error.message, code: error.code } }
       }
 
-      return { data, error: null }
+      // No rows updated - profile doesn't exist
+      if (!data || data.length === 0) {
+        return { data: null, error: { message: 'Profile not found', code: 'NOT_FOUND' } }
+      }
+
+      return { data: data[0], error: null }
     } catch (err) {
       console.error('updateProfile error:', err)
       return { data: null, error: { message: err.message, code: 'UNKNOWN_ERROR' } }
